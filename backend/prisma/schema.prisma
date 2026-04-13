@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+enum Role {
+  EMPLOYEE
+  MANAGER
+}
+
+enum ContactType {
+  EMAIL
+  PHONE
+}
+
+enum VehicleUserType {
+  DRIVER
+  ASSISTANT
+}
+
+enum IdentificationType {
+  CPF
+  CNPJ
+}
+
+enum OrderServiceStatus {
+  AVAILABLE
+  WAITING_ASSIGN
+  FINISHED
+}
+
+model User {
+  id              String @id @default(uuid()) @db.Uuid
+  name            String
+  role            Role
+  credentialId    String @unique @map("credential_id") @db.Uuid
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  credential Credential @relation(fields: [credentialId], references: [id], onDelete: Cascade)
+  vehicleUsers VehicleUser[]
+
+  @@map("users")
+}
+
+model Credential {
+  id              String @id @default(uuid()) @db.Uuid
+  email           String @unique
+  password        String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user User?
+
+  @@map("credential")
+}
+
+model Contact {
+  id              String @id @default(uuid()) @db.Uuid
+  customerId      String @map("customer_id") @db.Uuid
+  type            ContactType
+  value           String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("contact")
+}
+
+model Address{
+  id              String @id @default(uuid()) @db.Uuid
+  customerId      String @map("customer_id") @db.Uuid
+  street          String
+  number          String
+  complement      String?
+  neighborhood    String
+  postCode        String
+  city            String
+  state           String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  orderServices OrderService[]
+
+  @@map("address")
+}
+
+model Vehicle {
+  id              String @id @default(uuid()) @db.Uuid
+  plate           String @unique
+  model           String
+  color           String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  vehicleUsers VehicleUser[]
+  @@map("vehicle")
+}
+
+model VehicleUser {
+  id              String @id @default(uuid()) @db.Uuid
+  vehicleId       String @map("vehicle_id") @db.Uuid
+  userId          String @map("user_id") @db.Uuid
+  type            VehicleUserType
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+  records VehicleUserRecord[]
+  orderServices OrderService[]
+
+  @@unique([vehicleId, userId])
+  @@map("vehicle_user")
+}
+
+model VehicleUserRecord {
+  id              String @id @default(uuid()) @db.Uuid
+  vehicleUserId   String @map("vehicle_user_id") @db.Uuid
+  vehicleId       String @map("vehicle_id") @db.Uuid
+  userId          String @map("user_id") @db.Uuid
+  type            VehicleUserType
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  vehicleUser   VehicleUser @relation(fields: [vehicleUserId], references: [id])
+
+  @@map("vehicle_user_record")
+}
+
+model Customer {
+  id                String @id @default(uuid()) @db.Uuid
+  name              String
+  identificationId  String @map("identification_id") @unique @db.Uuid
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  identification    Identification @relation(fields: [identificationId], references: [id])
+
+  contact Contact[]
+  address Address[]
+
+  @@map("customer")
+}
+
+model Identification {
+  id              String @id @default(uuid()) @db.Uuid
+  type            IdentificationType
+  value           String @unique
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  customer Customer?
+
+  @@map("identification")
+}
+
+model Service {
+  id              String @id @default(uuid()) @db.Uuid
+  name            String
+  value           Int
+  description     String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  services ServiceOrderService[]
+
+  @@map("service")
+}
+
+model OrderService{
+  id              String @id @default(uuid()) @db.Uuid
+  vehicleUserId   String @map("vehicle_user_id") @db.Uuid
+  date            DateTime
+  addressId       String @map("address_id") @db.Uuid
+  status          OrderServiceStatus
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  vehicleUser   VehicleUser @relation(fields: [vehicleUserId], references: [id])
+  address       Address @relation(fields: [addressId], references: [id])
+  services ServiceOrderService[]
+
+
+
+  @@map("order_service")
+}
+
+model ServiceOrderService {
+  id              String @id @default(uuid()) @db.Uuid
+  serviceId       String @map("service_id") @db.Uuid
+  orderServiceId  String @map("order_service_id") @db.Uuid
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  service   Service @relation(fields: [serviceId], references: [id])
+  orderService  OrderService @relation(fields: [orderServiceId], references: [id], onDelete: Cascade)
+
+  @@map("service_order_service")
+}
