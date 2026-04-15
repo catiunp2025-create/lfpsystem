@@ -85,7 +85,7 @@ model Address{
   number          String
   complement      String?
   neighborhood    String
-  postCode        String
+  postCode        String @map("post_code")
   city            String
   state           String
   createdAt       DateTime @default(now()) @map("created_at")
