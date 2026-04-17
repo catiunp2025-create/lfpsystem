@@ -1,0 +1,29 @@
+-- AlterTable
+ALTER TABLE "address" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "contact" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "credential" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "customer" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "identification" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "order_service" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "service" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "users" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "vehicle" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "vehicle_user" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP;
