@@ -17,16 +17,20 @@ function Login() {
         password: inputPass.current?.value,
       });
 
-      const { token, user } = response.data;
+      console.log(response.data);
+
+      const { token } = response.data;
 
       localStorage.setItem("token", token);
-      localStorage.setItem("user", user);
 
       if (token) {
         navigate("/home");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        navigate("/auth/login");
+      }
+      console.log(error);
     }
   }
 
