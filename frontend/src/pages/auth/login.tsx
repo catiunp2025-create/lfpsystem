@@ -1,18 +1,33 @@
-import { useRef, type SubmitEvent } from "react";
+import React, { useRef } from "react";
 import api from "../../services/api";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPass = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
-  async function userLogin(event: SubmitEvent<HTMLFormElement>) {
+  async function userLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await api.post("auth/login", {
-      email: "user1@email.com",
-      password: "123456",
-    });
+    try {
+      const response = await api.post("auth/login", {
+        email: inputEmail.current?.value,
+        password: inputPass.current?.value,
+      });
+
+      const { token, user } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", user);
+
+      if (token) {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -20,9 +35,14 @@ function Login() {
       <div className="bloco-superior">CATI - Sistema LFP</div>
       <form onSubmit={userLogin}>
         <h1>Login</h1>
-        <input placeholder="Email" name="email" type="email" ref={inputEmail} />
         <input
-          placeholder="Senha"
+          placeholder="Digite seu email"
+          name="email"
+          type="email"
+          ref={inputEmail}
+        />
+        <input
+          placeholder="Digite sua senha"
           name="password"
           type="password"
           ref={inputPass}
