@@ -7,7 +7,7 @@ function App() {
       <Routes>
         <Route path="auth/login" element={<Login />} />
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<div>Home</div>} />
+        <Route path="/home" element={<div><h1>Home</h1></div>} />
         <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>
     </BrowserRouter>

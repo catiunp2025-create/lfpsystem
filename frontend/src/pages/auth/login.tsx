@@ -17,8 +17,6 @@ function Login() {
         password: inputPass.current?.value,
       });
 
-      console.log(response.data);
-
       const { token } = response.data;
 
       localStorage.setItem("token", token);
