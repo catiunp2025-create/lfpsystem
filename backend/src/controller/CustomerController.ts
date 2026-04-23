@@ -6,7 +6,7 @@ import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateCustomerDTO } from "src/shared/dtos/customer/CreateCustomerDTO";
 import { CreateCustomerUseCase } from "src/usecase/customer/CreateCustomerUseCase";
 
-@Controller('/customer')
+@Controller('/customers')
 export class CustomerController{
     constructor(
         private readonly createCustomerUseCase: CreateCustomerUseCase
