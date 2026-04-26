@@ -1,0 +1,31 @@
+.bloco-superior {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  color: #fff;
+  background-color: #0c1222;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  padding-left: 10px;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.button-sidebar {
+  display: flex;
+  background-color: #fcd34d;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.button-sidebar img {
+  width: 20px;
+  height: auto;
+}

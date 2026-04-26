@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import api from "../../services/api";
-import "./login.css";
+import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { BlocoSuperior } from "../../components/bloco_superior/BlocoSuperior";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -17,11 +18,11 @@ function Login() {
         password: inputPass.current?.value,
       });
 
-      const { token } = response.data;
+      const { accessToken } = response.data;
 
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", accessToken);
 
-      if (token) {
+      if (accessToken) {
         navigate("/home");
       }
     } catch (error: any) {
@@ -34,7 +35,7 @@ function Login() {
 
   return (
     <div className="container-login">
-      <div className="bloco-superior">CATI - Sistema LFP</div>
+      <BlocoSuperior />
       <form onSubmit={userLogin}>
         <h1>Login</h1>
         <input
