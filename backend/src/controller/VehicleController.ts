@@ -10,9 +10,9 @@ import { CreateVehicleUseCase } from "src/usecase/vehicle/CreateVehicleUseCase";
 export class VehicleController{
     constructor(private readonly createVehicleUseCase: CreateVehicleUseCase){}
 
-    @Post('/create')
-        @UseGuards(JwtAuthGuard, RolesGuard)
-        @Roles(Role.MANAGER)
+    @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.MANAGER)
     create(@Body(){model, plate, color}: CreateVehicleDTO):Promise<Vehicle>{
         return this.createVehicleUseCase.execute({model, plate, color});
     }

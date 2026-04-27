@@ -1,13 +1,18 @@
 import { Injectable, OnModuleInit } from "@nestjs/common";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, VehicleUser } from "@prisma/client";
 
 function createExtendedClient(prisma: PrismaClient) {
     return prisma.$extends({
         query: {
             vehicleUser: {
                 async create({ args, query }) {
-                    const result = await query(args);
-                    await (prisma as any).vehicleUserRecord.create({
+                    const result = await query(args) as VehicleUser;
+
+                    if (!result.id || !result.vehicleId || !result.userId) {
+                        throw new Error('VehicleUser criado sem dados obrigatórios');
+                    }
+
+                    await (prisma).vehicleUserRecord.create({
                         data: {
                             vehicleUserId: result.id,
                             vehicleId: result.vehicleId,

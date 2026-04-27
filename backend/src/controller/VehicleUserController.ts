@@ -17,5 +17,5 @@ export class VehicleUserController{
         @Param('vehicleId') vehicleId: string,
         @Body(){userId, type}: CreateVehicleUserDTO):Promise<VehicleUser>{
             return this.createVehicleUserUseCase.execute({vehicleId, userId, type})
-        }
+        };
 }
