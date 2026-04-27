@@ -4,6 +4,7 @@ import { Roles } from "src/decorators/Roles.decorator";
 import { JwtAuthGuard } from "src/guards/JwtAuthGuard";
 import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateAddressDTO } from "src/shared/dtos/address/CreateAddressDTO";
+import { CustomerParamDTO } from "src/shared/dtos/customer/CustomerParamDTO";
 import { CreateAddressUseCase } from "src/usecase/address/CreateAddressUseCase";
 
 @Controller()
@@ -14,7 +15,7 @@ export class AddressController {
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.MANAGER)
     create(
-        @Param('customerId') customerId: string,
+        @Param() {customerId}: CustomerParamDTO,
         @Body(){street, number, complement, neighborhood, postCode, city, state}: CreateAddressDTO
     ):Promise<Address>{
         return this.createAddressUseCase.execute({customerId, street, number, complement, neighborhood, postCode, city, state});

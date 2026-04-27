@@ -12,7 +12,7 @@ export class CustomerController{
         private readonly createCustomerUseCase: CreateCustomerUseCase
     ){}
 
-    @Post('/create')
+    @Post()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.MANAGER)
     create(@Body(){name, type, value}: CreateCustomerDTO):Promise<Customer>{
