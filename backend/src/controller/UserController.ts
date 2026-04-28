@@ -12,7 +12,7 @@ export class UserController{
         private readonly createUserUseCase: CreateUserUseCase
     ){}
 
-    @Post('/create')
+    @Post()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.MANAGER)
     create(@Body() {name, role, email, password}: CreateUserDTO): Promise<User>{
