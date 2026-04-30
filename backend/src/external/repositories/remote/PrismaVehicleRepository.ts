@@ -14,4 +14,7 @@ export class PrismaVehicleRepository implements VehicleRepository{
     findByPlate({ plate }: FindByPlate): Promise<Vehicle | null> {
         return this.repository.vehicle.findFirst({where:{plate}});
     }
+    findAll(): Promise<Vehicle[]> {
+        return this.repository.vehicle.findMany();
+    }
 }

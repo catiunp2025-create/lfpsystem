@@ -13,4 +13,5 @@ export interface FindByPlate{
 export abstract class VehicleRepository {
     abstract create({plate, model, color}: Create):Promise <Vehicle>;
     abstract findByPlate({plate}: FindByPlate): Promise<Vehicle | null>;
+    abstract findAll():Promise<Vehicle[]>;
 }
