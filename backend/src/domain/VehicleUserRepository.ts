@@ -1,4 +1,4 @@
-import { VehicleUser, VehicleUserType } from "@prisma/client";
+import { User, Vehicle, VehicleUser, VehicleUserType } from "@prisma/client";
 
 export interface Create {
     vehicleId: string;
@@ -11,7 +11,10 @@ export interface FindBy{
     userId: string;
 }
 
+export type FindAll = VehicleUser &{user: User, vehicle: Vehicle};
+
 export abstract class VehicleUserRepository{
     abstract create({vehicleId, userId, type}: Create):Promise<VehicleUser>;
     abstract findBy({vehicleId, userId}: FindBy): Promise<VehicleUser | null>;
+    abstract findAll(): Promise<FindAll[]>;
 }
