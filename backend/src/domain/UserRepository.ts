@@ -1,4 +1,4 @@
-import { Role, User } from "@prisma/client";
+import { Credential, Role, User } from "@prisma/client";
 
 export interface Create {
     name: string;
@@ -8,6 +8,9 @@ export interface Create {
 
 }
 
+export type Users = User &{credential: Credential}
+
 export abstract class UserRepository {
     abstract create({name, role, email, password}: Create): Promise<User>;
+    abstract findAll():Promise<Users[]>;
 }
