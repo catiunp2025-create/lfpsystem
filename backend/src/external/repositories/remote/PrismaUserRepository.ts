@@ -1,4 +1,4 @@
-import { Create, UserRepository } from "src/domain/UserRepository";
+import { Create, UserRepository, Users } from "src/domain/UserRepository";
 import { PrismaRemoteRepository } from "./PrismaRemoteRepository";
 import { Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
@@ -18,6 +18,15 @@ export class PrismaUserRepository implements UserRepository {
             })
 
             return user;
+        })
+    }
+
+    findAll(): Promise<Users[]> {
+        return this.repository.user.findMany({
+            include: {credential: true},
+            orderBy: {
+                name: 'asc'
+            }
         })
     }
 }

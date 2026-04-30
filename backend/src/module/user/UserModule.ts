@@ -8,6 +8,7 @@ import { PrismaCredentialRepository } from "src/external/repositories/remote/Pri
 import { PrismaUserRepository } from "src/external/repositories/remote/PrismaUserRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateUserUseCase } from "src/usecase/user/CreateUserUseCase";
+import { ListUsersUseCase } from "src/usecase/user/ListUsersUseCase";
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { CreateUserUseCase } from "src/usecase/user/CreateUserUseCase";
     controllers: [UserController],
     providers: [
         CreateUserUseCase,
+        ListUsersUseCase,
         JwtStrategy,
         {
             provide: UserRepository,
