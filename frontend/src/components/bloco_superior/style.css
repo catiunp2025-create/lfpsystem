@@ -11,6 +11,7 @@
   padding-left: 10px;
   gap: 8px;
   z-index: 1000;
+  cursor: default;
 }
 
 .button-sidebar {
@@ -23,9 +24,4 @@
   justify-content: center;
   border: none;
   cursor: pointer;
-}
-
-.button-sidebar img {
-  width: 20px;
-  height: auto;
 }

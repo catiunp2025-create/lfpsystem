@@ -25,7 +25,7 @@ export function Sidebar({ open }: SidbebarProps) {
             <div className="menu-separator"></div>
           </h4>
           <li>
-            <a href="#">
+            <a href="http://localhost:5173/home">
               <SpaceDashboardOutlinedIcon /> Dashboard
             </a>
           </li>

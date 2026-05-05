@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import api from "../../services/api";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { BlocoSuperior } from "../../components/bloco_superior/BlocoSuperior";
+import { BlocoSuperiorLogin } from "../../components/bloco_superior-login/BlocoSuperiorLogin";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -20,9 +20,8 @@ function Login() {
 
       const { accessToken } = response.data;
 
-      localStorage.setItem("token", accessToken);
-
       if (accessToken) {
+        localStorage.setItem("token", accessToken);
         navigate("/home");
       }
     } catch (error: any) {
@@ -35,7 +34,7 @@ function Login() {
 
   return (
     <div className="container-login">
-      <BlocoSuperior />
+      <BlocoSuperiorLogin />
       <form onSubmit={userLogin}>
         <h1>Login</h1>
         <input
