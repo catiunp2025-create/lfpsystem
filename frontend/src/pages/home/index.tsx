@@ -98,6 +98,23 @@ function formatChartData(apiData: ApiData[]): ChartData[] {
   }));
 }
 
+function getLastMonthRange(months: number) {
+  const now = new Date();
+  return {
+    startDate: new Date(now.getFullYear(), now.getMonth() - (months - 1)),
+
+    endDate: new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59,
+      999,
+    ),
+  };
+}
+
 function Home() {
   const [open, setOpen] = useState(false);
   const [serviceOrders, setServiceOrders] = useState<AllOrderService[]>([]);
@@ -117,6 +134,7 @@ function Home() {
   const dataMonth = getMonth.charAt(0).toUpperCase() + getMonth.slice(1);
   const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
   const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+  const { startDate, endDate } = getLastMonthRange(12);
   const currentYearOrders = serviceOrders.filter(
     (os) => os.date.getFullYear() === currentYear,
   );
@@ -157,7 +175,9 @@ function Home() {
   function testFormatChartData(allOrderService: AllOrderService[]) {
     setLoading(false);
     setError(null);
-    setServiceOrders(allOrderService);
+    setServiceOrders(
+      allOrderService.filter((os) => os.date > startDate && os.date < endDate),
+    );
   }
 
   useEffect(() => {
