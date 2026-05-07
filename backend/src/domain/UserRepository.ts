@@ -1,4 +1,4 @@
-import { Credential, Role, User } from "@prisma/client";
+import { Role, User } from "@prisma/client";
 
 export interface Create {
     name: string;
@@ -8,7 +8,16 @@ export interface Create {
 
 }
 
-export type Users = User &{credential: Credential}
+export type Users = {
+    id: string;
+    name: string;
+    role: Role;
+    credential:{
+        id: string;
+        email:string;
+    }
+
+}
 
 export abstract class UserRepository {
     abstract create({name, role, email, password}: Create): Promise<User>;

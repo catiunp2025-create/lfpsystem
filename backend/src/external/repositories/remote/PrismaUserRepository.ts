@@ -23,7 +23,17 @@ export class PrismaUserRepository implements UserRepository {
 
     findAll(): Promise<Users[]> {
         return this.repository.user.findMany({
-            include: {credential: true},
+            select:{
+                id: true,
+                name: true,
+                role: true,
+                credential:{
+                    select:{
+                        id:true,
+                        email:true
+                    }
+                }
+            },
             orderBy: {
                 name: 'asc'
             }
