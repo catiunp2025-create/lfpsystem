@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Create, CustomerRepository } from "src/domain/CustomerRepository";
+import { Create, CustomerRepository, Customers } from "src/domain/CustomerRepository";
 import { PrismaRemoteRepository } from "./PrismaRemoteRepository";
 import { Customer } from "@prisma/client";
 
@@ -18,6 +18,16 @@ export class PrismaCustomerRepository implements CustomerRepository {
             })
 
             return customer;
+        })
+    }
+    findAll(): Promise<Customers[]> {
+        return this.repository.customer.findMany({
+            include:{
+                identification: true,
+                address: true,
+                contact: true
+            },
+            orderBy: {name: 'asc'}
         })
     }
 }

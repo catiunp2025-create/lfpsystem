@@ -4,11 +4,6 @@ import { AppService } from './app.service';
 import { PrismaModule } from './external/repositories/remote/PrismaModule';
 import { AuthModule } from './module/auth/AuthModule';
 import { UserModule } from './module/user/UserModule';
-<<<<<<< feat/user-list
-
-@Module({
-  imports: [PrismaModule, AuthModule, UserModule],
-=======
 import { VehicleModule } from './module/vehicle/VehicleModule';
 import { VehicleUserModule } from './module/vehicle_user/VehicleUserModule';
 import { CustomerModule } from './module/customer/CustomerModule';
@@ -17,7 +12,6 @@ import { AddressModule } from './module/address/AddressModule';
 
 @Module({
   imports: [PrismaModule, AuthModule, UserModule, CustomerModule, ContactModule, AddressModule,VehicleModule, VehicleUserModule],
->>>>>>> main
   controllers: [AppController],
   providers: [AppService],
 })
