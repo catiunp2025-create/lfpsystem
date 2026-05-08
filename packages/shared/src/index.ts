@@ -58,3 +58,10 @@ export type Customer = {
 
     }[]
 }
+
+export type Service = {
+    id: string;
+    name: string;
+    value: number;
+    description?: string;
+}
