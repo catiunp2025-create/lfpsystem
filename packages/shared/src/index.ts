@@ -2,6 +2,7 @@ export type Role = 'MANAGER' | 'EMPLOYEE';
 export type VehicleUserType = 'DRIVER' | 'ASSISTANT';
 export type IdentificationType = 'CNPJ' | 'CPF';
 export type ContactType = 'PHONE' | 'EMAIL';
+export type OrderServiceStatus = 'AVAILABLE' | 'WAITING_ASSIGN' | 'FINISHED';
 
 export type Users = {
     id: string;
@@ -64,4 +65,13 @@ export type Service = {
     name: string;
     value: number;
     description?: string;
+}
+
+export type OrderService = {
+    id: string;
+    vehicleUserId: string;
+    date: Date;
+    status: OrderServiceStatus;
+    addressId: string;
+    serviceIds: string[];
 }
