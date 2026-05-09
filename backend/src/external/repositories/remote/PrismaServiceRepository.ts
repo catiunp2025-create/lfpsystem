@@ -19,4 +19,8 @@ export class PrismaServiceRepository implements ServiceRepository{
         })
     }
 
+    findAll(): Promise<Service[]> {
+        return this.repository.service.findMany();
+    }
+
 }

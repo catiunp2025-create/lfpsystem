@@ -13,4 +13,5 @@ export interface FindByName {
 export abstract class ServiceRepository{
     abstract create({name, value, description}:Create):Promise<Service>;
     abstract findByName({name}:FindByName):Promise<Service | null>;
+    abstract findAll():Promise<Service[]>;
 }
