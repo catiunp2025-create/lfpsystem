@@ -75,3 +75,46 @@ export type OrderService = {
     addressId: string;
     serviceIds: string[];
 }
+
+export type OrderServices = {
+    id: string;
+    date: string;
+    status: OrderServiceStatus;
+    vehicleUser: {
+        id: string;
+        type: VehicleUserType;
+        vehicle: Vehicle;
+        user: {
+            id: string;
+            name: string;
+            role: Role;
+        }
+    };
+    address: {
+        id: string;
+        street: string;
+        number: string;
+        complement: string | null;
+        neighborhood: string;
+        postCode: string;
+        city: string;
+        state: string;
+        customer: {
+            id: string;
+            name: string;
+            contact: {
+                id: string;
+                type: ContactType;
+                value: string;
+            }[]
+        }
+    };
+    services: {
+        service: {
+            id: string;
+            name: string;
+            value: number;
+            description?: string | null;
+        }
+    }[]
+}
