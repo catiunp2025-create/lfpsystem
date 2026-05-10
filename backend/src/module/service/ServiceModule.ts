@@ -6,6 +6,7 @@ import { ServiceRepository } from "src/domain/ServiceRepository";
 import { PrismaServiceRepository } from "src/external/repositories/remote/PrismaServiceRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateServiceUseCase } from "src/usecase/service/CreateServiceUseCase";
+import { ListServiceUseCase } from "src/usecase/service/ListServiceUseCase";
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { CreateServiceUseCase } from "src/usecase/service/CreateServiceUseCase";
     controllers: [ServiceController],
     providers: [
         CreateServiceUseCase,
+        ListServiceUseCase,
         JwtStrategy,
         {
             provide: ServiceRepository,
