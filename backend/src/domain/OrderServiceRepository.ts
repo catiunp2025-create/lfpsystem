@@ -1,4 +1,4 @@
-import { OrderService, OrderServiceStatus } from "@prisma/client";
+import { OrderService, OrderServiceStatus, Prisma } from "@prisma/client";
 
 export interface CreateOrderService{
     vehicleUserId: string;
@@ -7,6 +7,32 @@ export interface CreateOrderService{
     status: OrderServiceStatus
 }
 
+export type OrderServices = Prisma.OrderServiceGetPayload<{
+    include:{
+        vehicleUser:{
+            include:{
+                vehicle: true,
+                user: true
+            }
+        },
+        address:{
+            include:{
+                customer:{
+                    include:{
+                        contact: true
+                    }
+                }
+            }
+        },
+        services:{
+            include:{
+                service:true
+            }
+        }
+    }
+}>
+
 export abstract class OrderServiceRepository{
     abstract create({vehicleUserId, date, addressId, status}: CreateOrderService):Promise<OrderService>
+    abstract findAll():Promise<OrderServices[]>
 }
