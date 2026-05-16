@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import api from "../../services/api";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import { BlocoSuperiorLogin } from "../../components/bloco_superior-login/BlocoSuperiorLogin";
+import { TopBarLogin } from "../../components/top_bar_login/TopBarLogin";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -34,7 +34,7 @@ function Login() {
 
   return (
     <div className="container-login">
-      <BlocoSuperiorLogin />
+      <TopBarLogin />
       <form onSubmit={userLogin}>
         <h1>Login</h1>
         <input

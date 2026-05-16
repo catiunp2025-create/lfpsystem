@@ -1,13 +1,14 @@
 import "./style.css";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import { APP_CONFIG } from "../../constants/app";
 
-export function BlocoSuperiorLogin() {
+export function TopBarLogin() {
   return (
-    <header className="bloco-superior-login">
+    <div className="bloco-superior-login">
       <span className="icon-bloco-superior">{<DescriptionOutlinedIcon />}</span>
       <div>
-        <p>CATI - Sistema LFP</p>
+        <span>{`${APP_CONFIG.name} - ${APP_CONFIG.fullName}`}</span>
       </div>
-    </header>
+    </div>
   );
 }

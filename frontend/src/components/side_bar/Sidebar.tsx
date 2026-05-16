@@ -30,7 +30,7 @@ export function Sidebar({ open }: SidbebarProps) {
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="http://localhost:5173/new-order">
               <ReceiptLongOutlinedIcon />
               Nova Ordem de Serviço
             </a>

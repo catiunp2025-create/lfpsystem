@@ -1,0 +1,41 @@
+@import "../../styles/variables.css";
+
+.dashboard-shell {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-layout {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - var(--topbar-height));
+  margin-top: var(--topbar-height);
+}
+
+.main-layout .sidebar {
+  position: fixed;
+  top: var(--topbar-height);
+  left: 0;
+
+  width: var(--sidebar-closed);
+  height: calc(100vh - var(--topbar-height));
+
+  transition: width var(--transition-default);
+
+  z-index: 999;
+}
+
+.main-layout.open .sidebar {
+  width: var(--sidebar-open);
+}
+
+.content {
+  flex: 1;
+  height: 100%;
+  margin-left: var(--sidebar-closed);
+  transition: margin-left 0.3s ease;
+}
+
+.main-layout.open .content {
+  margin-left: var(--sidebar-open);
+}
