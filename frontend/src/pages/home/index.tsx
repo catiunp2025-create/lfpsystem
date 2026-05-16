@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { BlocoSuperior } from "../../components/bloco_superior/BlocoSuperior";
 import "./style.css";
-import { Sidebar } from "../../components/side_bar/Sidebar";
 import {
   Bar,
   BarChart,
@@ -19,6 +17,7 @@ import type {
   Service,
 } from "../../types/dashboard";
 import { mockServiceOrders } from "../../mocks/dashboard.mock";
+import MainLayout from "../../components/layout/MainLayout";
 
 function formatApiData(allOrderService: AllOrderService[]): ApiData[] {
   const apiData = allOrderService.reduce<Record<string, ApiData>>((acc, os) => {
@@ -116,7 +115,6 @@ function getLastMonthRange(months: number) {
 }
 
 function Home() {
-  const [open, setOpen] = useState(false);
   const [serviceOrders, setServiceOrders] = useState<AllOrderService[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -186,142 +184,133 @@ function Home() {
   }, []);
 
   return (
-    <div className="main-container">
-      <BlocoSuperior toggleSidebar={() => setOpen((prev) => !prev)} />
-      <div className={`layout ${open ? "open" : ""}`}>
-        <Sidebar open={open} />
-        <main className="content-home">
-          <header className="dashboard-header">
-            <h1>Dashboard</h1>
-            <span>{`${dataMonth} ${currentYear}`}</span>
-          </header>
+    <MainLayout pageTitle="Início">
+      <main className="content-home">
+        <header className="dashboard-header">
+          <h1>Dashboard</h1>
+          <span>{`${dataMonth} ${currentYear}`}</span>
+        </header>
 
-          <section className="cards">
-            <div className="card">
-              <span className="card-title">Faturamento {dataMonth}</span>
-              {currentCardData ? (
-                <div>
-                  <h2>R$ {currentCardData.total.toLocaleString("pt-BR")}</h2>
-                  {previousCardData && (
-                    <p className="card-sub">
-                      {Math.round(
-                        (currentCardData?.total * 100) /
-                          previousCardData?.total -
-                          100,
-                      )}
-                      % vs mês anterior
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <h2>Ainda sem dados</h2>
-              )}
-            </div>
-            <div className="card">
-              <span className="card-title">
-                Ordens de Serviço {currentYear}
-              </span>
-              <h2>{orderServicePerYear}</h2>
-              <p className="card-sub">
-                {orderServiceCompleted} concluídas • {orderServicePending}{" "}
-                pendentes
-              </p>
-            </div>
-            <div className="card">
-              <span className="card-title">
-                Serviço principal {currentYear}
-              </span>
-              <h2>{mostRequestedServiceName}</h2>
-              <p className="card-sub">
-                {mostRequestedServices.length} requisições
-              </p>
-            </div>
-          </section>
+        <section className="cards">
+          <div className="card">
+            <span className="card-title">Faturamento {dataMonth}</span>
+            {currentCardData ? (
+              <div>
+                <h2>R$ {currentCardData.total.toLocaleString("pt-BR")}</h2>
+                {previousCardData && (
+                  <p className="card-sub">
+                    {Math.round(
+                      (currentCardData?.total * 100) / previousCardData?.total -
+                        100,
+                    )}
+                    % vs mês anterior
+                  </p>
+                )}
+              </div>
+            ) : (
+              <h2>Ainda sem dados</h2>
+            )}
+          </div>
+          <div className="card">
+            <span className="card-title">Ordens de Serviço {currentYear}</span>
+            <h2>{orderServicePerYear}</h2>
+            <p className="card-sub">
+              {orderServiceCompleted} concluídas • {orderServicePending}{" "}
+              pendentes
+            </p>
+          </div>
+          <div className="card">
+            <span className="card-title">Serviço principal {currentYear}</span>
+            <h2>{mostRequestedServiceName}</h2>
+            <p className="card-sub">
+              {mostRequestedServices.length} requisições
+            </p>
+          </div>
+        </section>
 
-          <section className="chart">
-            <div className="full card">
-              <span className="chart-title">Faturamento Mensal</span>
-              {loading ? (
-                <div className="chart-skeleton">Carregando dados...</div>
-              ) : error ? (
-                <div>
-                  <span>{error}</span>
-                  <button onClick={fetchDashboardData}>Tentar novamente</button>
-                </div>
-              ) : !chartData.length ? (
-                <span>Sem dados disponíveis.</span>
-              ) : (
-                /* mudar para dados da api após reunião */
-                <div className="chart-area">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart
-                      data={chartData}
-                      width={500}
-                      height={300}
-                      margin={{
-                        top: 10,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
+        <section className="chart">
+          <div className="full card">
+            <span className="chart-title">Faturamento Mensal</span>
+            {loading ? (
+              <div className="chart-skeleton">Carregando dados...</div>
+            ) : error ? (
+              <div>
+                <span>{error}</span>
+                <button onClick={fetchDashboardData}>Tentar novamente</button>
+              </div>
+            ) : !chartData.length ? (
+              <span>Sem dados disponíveis.</span>
+            ) : (
+              /* mudar para dados da api após reunião */
+              <div className="chart-area">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={chartData}
+                    width={500}
+                    height={300}
+                    margin={{
+                      top: 10,
+                      right: 30,
+                      left: 20,
+                      bottom: 5,
+                    }}
+                    barCategoryGap="10%"
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      stroke="#2a3447"
+                      vertical={false}
+                    />
+                    <XAxis
+                      dataKey="dateKey"
+                      tick={{
+                        fill: "#9ca3af",
+                        fontSize: 14,
                       }}
-                      barCategoryGap="10%"
-                    >
-                      <CartesianGrid
-                        strokeDasharray="3 3"
-                        stroke="#2a3447"
-                        vertical={false}
-                      />
-                      <XAxis
-                        dataKey="dateKey"
-                        tick={{
-                          fill: "#9ca3af",
-                          fontSize: 14,
-                        }}
-                        interval={0}
-                        angle={-30}
-                        textAnchor="end"
-                        height={46}
-                      />
-                      <YAxis
-                        tick={{
-                          fill: "#9ca3af",
-                          fontSize: 14,
-                        }}
-                        axisLine={false}
-                        tickLine={false}
-                        domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
-                      />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: "#0F172A",
-                          border: "none",
-                          borderRadius: "8px",
-                          color: "#fff",
-                        }}
-                        labelStyle={{ color: "#dbd4e3" }}
-                        formatter={(value) => [`R$ ${value}`, "Faturamento"]}
-                      />
-                      <Bar
-                        dataKey="total"
-                        fill="#FBBF24"
-                        radius={[8, 8, 0, 0]}
-                        maxBarSize={50}
-                        label={{
-                          position: "top",
-                          fill: "#9ca3af",
-                          fontSize: "14",
-                        }}
-                        activeBar={{ fill: "#FCD34D" }}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              )}
-            </div>
-          </section>
-        </main>
-      </div>
-    </div>
+                      interval={0}
+                      angle={-30}
+                      textAnchor="end"
+                      height={46}
+                    />
+                    <YAxis
+                      tick={{
+                        fill: "#9ca3af",
+                        fontSize: 14,
+                      }}
+                      axisLine={false}
+                      tickLine={false}
+                      domain={[0, (dataMax) => Math.ceil(dataMax * 1.1)]}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#0F172A",
+                        border: "none",
+                        borderRadius: "8px",
+                        color: "#fff",
+                      }}
+                      labelStyle={{ color: "#dbd4e3" }}
+                      formatter={(value) => [`R$ ${value}`, "Faturamento"]}
+                    />
+                    <Bar
+                      dataKey="total"
+                      fill="#FBBF24"
+                      radius={[8, 8, 0, 0]}
+                      maxBarSize={50}
+                      label={{
+                        position: "top",
+                        fill: "#9ca3af",
+                        fontSize: "14",
+                      }}
+                      activeBar={{ fill: "#FCD34D" }}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </div>
+        </section>
+      </main>
+    </MainLayout>
   );
 }
 

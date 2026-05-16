@@ -1,0 +1,75 @@
+@import "../../styles/variables.css";
+
+.bloco-superior {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-height);
+  padding: 0 16px;
+  gap: 12px;
+  overflow: hidden;
+
+  background-color: #0c1222;
+  color: #ffffff;
+
+  z-index: 1000;
+  cursor: default;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.button-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  background-color: #fcd34d;
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.button-sidebar:hover {
+  transform: scale(1.05);
+}
+
+.button-sidebar:active {
+  transform: scale(0.96);
+}
+
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.topbar-divider {
+  opacity: 0.5;
+}
+
+.topbar-subtitle {
+  font-weight: 400;
+  color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+  .topbar-subtitle {
+    display: none;
+  }
+
+  .topbar-divider {
+    display: none;
+  }
+}
