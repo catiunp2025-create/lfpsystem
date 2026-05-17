@@ -1,6 +1,7 @@
 import "./style.css";
 import { MainLayout } from "../../components/layout/MainLayout";
 import { Steppers } from "./step_bar/StepBar";
+import { ResumeOs } from "./resume_os/ResumeOs";
 import { useState } from "react";
 
 /* Para usar nas Steps como tipo de props */
@@ -14,6 +15,7 @@ function NewOrderService() {
   const [currentStep, setCurrentStep] = useState(1);
   const [maxVisitedStep, setMaxVisitedStep] = useState(1);
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
+  const [currentVehicle, setCurrentVehicle] = useState(1);
 
   /* Adicionar conforme cria as Steps */
   /* const stepsConfig = [StepVeiculo, StepCliente, StepServicos, StepFinalizar];
@@ -53,13 +55,21 @@ function NewOrderService() {
         completedSteps={completedSteps}
         onStepChange={handleStepChange}
       />
-      {/* <CurrentComponent
-        onNext={nextStep}
+      <div className="content-steppers">
+        <div className="step-content">
+          <h2>Conteúdo da Step</h2>
+          {/* <CurrentComponent
+        onNext={curentStep < 4 ? nextStep : undefined}
         onBack={currentStep > 1 ? prevStep : undefined}
         completeCurrentStep={completeCurrentStep}
       /> */}
-      {/* Formato do botão voltar nas Steps 2+
+          {/* Formato do botão voltar nas Steps 2+
         {onBack && <button onClick={onBack}>Voltar</button>} */}
+        </div>
+        <div className="resume-content">
+          <ResumeOs />
+        </div>
+      </div>
     </MainLayout>
   );
 }

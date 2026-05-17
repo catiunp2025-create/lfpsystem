@@ -41,7 +41,7 @@
 
 .cards .card {
   background:
-    linear-gradient(#0f172a, #0f172a) padding-box,
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
     linear-gradient(120deg, transparent, transparent) border-box;
   border-radius: 10px;
   padding: 10px;
@@ -58,7 +58,7 @@
 .cards .card:hover {
   transform: translateY(-3px);
   background:
-    linear-gradient(#0f172a, #0f172a) padding-box,
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
     linear-gradient(120deg, orange, rgba(255, 140, 0, 0.2)) border-box;
   box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.35),
@@ -66,17 +66,15 @@
 }
 
 .cards .card:hover h2 {
-  text-shadow:
-    0 0 6px rgba(250, 204, 21, 0.5),
-    0 0 10px rgba(255, 255, 255, 0.25);
+  text-shadow: var(--shadow-text-h2);
 }
 
 .cards .card:hover .card-title {
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+  text-shadow: var(--shadow-text-title);
 }
 
 .cards .card:hover .card-sub {
-  text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+  text-shadow: var(--shadow-text-sub);
 }
 
 .chart {
@@ -87,6 +85,15 @@
 
   margin: 10px;
   padding: 5px;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: 0.08em;
 }
 
 .card.full {
@@ -110,16 +117,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  color: #dbd4e3;
-  letter-spacing: 0.08em;
-}
-
-.chart-title {
-  font-size: 18px;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: #000;
+  color: var(--color-text-secondary);
   letter-spacing: 0.08em;
 }
 
@@ -127,20 +125,20 @@
   font-size: 22px;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .card-sub {
   font-family: "Poppins", sans-serif;
   font-weight: 200;
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--color-text-muted);
 }
 
 .chart-skeleton {
   width: 100%;
   min-height: 300px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--color-border-soft);
   animation: pulse 1.5s infinite;
 }

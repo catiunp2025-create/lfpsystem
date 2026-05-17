@@ -18,7 +18,7 @@ export function Steppers({
   const steps: Step[] = steppers;
 
   return (
-    <nav className="stepper-container" aria-label="Progresso do formulário">
+    <nav className="steppers-container" aria-label="Progresso do formulário">
       {steps.map((step, index) => {
         const isActive = step.id === currentStep;
         const isCompleted = completedSteps.has(step.id);
