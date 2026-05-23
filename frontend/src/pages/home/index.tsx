@@ -161,8 +161,11 @@ function Home() {
     setError(null);
 
     try {
-      const response = await api.get("order-service");
-      setServiceOrders(response.data);
+      // const response = await api.get("/order-services");
+      const data: AllOrderService[] = mockServiceOrders; // response.data | mockServiceOrders
+      setServiceOrders(
+        data.filter((os) => os.date > startDate && os.date < endDate),
+      );
     } catch (error) {
       setError("Não foi possível carregar os dados.");
     } finally {
@@ -170,17 +173,8 @@ function Home() {
     }
   }
 
-  function testFormatChartData(allOrderService: AllOrderService[]) {
-    setLoading(false);
-    setError(null);
-    setServiceOrders(
-      allOrderService.filter((os) => os.date > startDate && os.date < endDate),
-    );
-  }
-
   useEffect(() => {
-    // fetchDashboardData();
-    testFormatChartData(mockServiceOrders); // Trocar pelo de cima, apenas teste
+    fetchDashboardData();
   }, []);
 
   return (
@@ -215,7 +209,7 @@ function Home() {
             <span className="card-title">Ordens de Serviço {currentYear}</span>
             <h2>{orderServicePerYear}</h2>
             <p className="card-sub">
-              {orderServiceCompleted} concluídas • {orderServicePending}{" "}
+              {orderServiceCompleted} concluídas | {orderServicePending}{" "}
               pendentes
             </p>
           </div>
@@ -236,12 +230,13 @@ function Home() {
             ) : error ? (
               <div>
                 <span>{error}</span>
-                <button onClick={fetchDashboardData}>Tentar novamente</button>
+                <button className="button-retry" onClick={fetchDashboardData}>
+                  Tentar novamente
+                </button>
               </div>
             ) : !chartData.length ? (
               <span>Sem dados disponíveis.</span>
             ) : (
-              /* mudar para dados da api após reunião */
               <div className="chart-area">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart

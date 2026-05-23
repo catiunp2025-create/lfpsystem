@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.css";
-import { Sidebar } from "../side_bar/Sidebar";
-import { TopBar } from "../top_bar/TopBar";
+import Sidebar from "../side_bar/Sidebar";
+import TopBar from "../top_bar/TopBar";
 type MainLayoutProps = {
   children: React.ReactNode;
   pageTitle: string;

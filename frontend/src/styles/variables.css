@@ -7,17 +7,24 @@
   --color-topbar-bg: #0c1222;
   --color-card-bg: #0f172a;
   --color-content-bg: transparent;
-  --color-primary: #fbbf24;
-  --color-primary-hover: #d89d00;
-
   --color-bg-dark: #08142b;
-  --color-bg-light: #ffffff;
+  --color-bg-light: #dbeafc;
+  --color-bg-disable: #E2E8F0;
+  --color-stepbar-bg: #f4f4f4;
+  --color-cards-icon-bg: #F1F5F9;
+
+  --color-primary: #fbbf24;
+  --color-primary-dark: #D97706;
+  --color-primary-hover: #d89d00;
+  --color-focus-visible: #f4b400;
 
   --color-text-primary: #fff;
   --color-text-secondary: #9aa6c1;
   --color-text-muted: #7f8ba3;
+  --color-text-dark-blue: #1e293b;
 
   --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-border-light: #d1d5db;
 
   /* TIPOGRAFIA */
   --label-small: 0.65rem;

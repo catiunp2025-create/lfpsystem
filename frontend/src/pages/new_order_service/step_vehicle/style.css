@@ -1,0 +1,53 @@
+@import "../../../styles/variables.css";
+
+.step-vehicle {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-height: 0;
+}
+
+.step-vehicle_content {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+
+  background: transparent;
+
+  gap: var(--spacing-md);
+  padding: 10px;
+  border-radius: 10px;
+
+  min-height: 0;
+  overflow: hidden;
+}
+
+.step-vehicle_lists {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.step-vehicle_list-vehicles,
+.step-vehicle_list-employees {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  gap: 12px;
+  padding-right: 4px;
+  min-height: 0;
+}
+
+.step-vehicle_footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}

@@ -15,7 +15,7 @@ type SidbebarProps = {
   open: boolean;
 };
 
-export function Sidebar({ open }: SidbebarProps) {
+function Sidebar({ open }: SidbebarProps) {
   return (
     <aside className={`sidebar ${open ? "open" : "closed"}`}>
       <div className="sidebar-inner">
@@ -103,3 +103,5 @@ export function Sidebar({ open }: SidbebarProps) {
     </aside>
   );
 }
+
+export default Sidebar;

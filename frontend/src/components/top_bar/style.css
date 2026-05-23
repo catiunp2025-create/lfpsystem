@@ -15,6 +15,7 @@
   background-color: var(--color-topbar-bg);
   color: #ffffff;
 
+  flex-shrink: 0;
   z-index: 1000;
   cursor: default;
 

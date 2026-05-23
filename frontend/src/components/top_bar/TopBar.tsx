@@ -7,7 +7,7 @@ type TopBarProps = {
   pageTitle: string;
 };
 
-export function TopBar({ toggleSidebar, pageTitle }: TopBarProps) {
+function TopBar({ toggleSidebar, pageTitle }: TopBarProps) {
   return (
     <header className="bloco-superior">
       <button type="button" onClick={toggleSidebar} className="button-sidebar">
@@ -21,3 +21,5 @@ export function TopBar({ toggleSidebar, pageTitle }: TopBarProps) {
     </header>
   );
 }
+
+export default TopBar;

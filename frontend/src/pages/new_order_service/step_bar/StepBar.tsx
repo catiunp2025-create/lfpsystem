@@ -1,4 +1,5 @@
-import { type Step, steppers } from "../../../constants/stepbar";
+import { type Step, steppers } from "../../../constants/newOrder";
+import type { StepNumber } from "../../../types/newOrder";
 import "./style.css";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 
@@ -6,7 +7,7 @@ type SteppersProps = {
   currentStep?: number;
   maxVisitedStep?: number;
   completedSteps: Set<number>;
-  onStepChange?: (step: number) => void;
+  onStepChange?: (step: StepNumber) => void;
 };
 
 export function Steppers({
@@ -28,7 +29,7 @@ export function Steppers({
           <div key={step.id} className="stepper-item">
             <button
               type="button"
-              onClick={() => isVisited && onStepChange?.(step.id)}
+              onClick={() => isVisited && onStepChange?.(step.id as StepNumber)}
               className={`step-button ${
                 isActive
                   ? "active"
