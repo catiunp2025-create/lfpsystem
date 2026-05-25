@@ -14,6 +14,7 @@ export type StepNumber = (typeof STEPS)[number];
 
 export type BaseStepProps = {
   currentStep: number;
+  currentStepData: StepData;
   onNext?: () => void;
   onBack?: () => void;
   validateStep: () => boolean;

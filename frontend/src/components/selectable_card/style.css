@@ -39,6 +39,11 @@
   box-shadow: 0 0 0 2px rgba(244, 180, 0, 0.15);
 }
 
+.selectable-card.selected:hover {
+  box-shadow: 0 0 0 2px rgba(244, 180, 0, 0.35);
+  transform: translateY(-1px);
+}
+
 .selectable-card-icon {
   display: flex;
   align-items: center;

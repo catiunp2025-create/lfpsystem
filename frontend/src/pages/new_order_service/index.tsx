@@ -218,6 +218,7 @@ function NewOrderService() {
   // Props base para todas as steps
   const baseProps: BaseStepProps = {
     currentStep,
+    currentStepData,
     onNext,
     onBack,
     validateStep,

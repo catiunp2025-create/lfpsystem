@@ -28,6 +28,7 @@ type StepVehicleProps = BaseStepProps & {
 
 function StepVehicle({
   currentStep,
+  currentStepData,
   onNext,
   validateStep,
   handleNewRegisterChange,
@@ -40,6 +41,12 @@ function StepVehicle({
   const [errorVehicles, setErrorVehicles] = useState<string | null>(null);
   const [loadingEmployees, setLoadingEmployees] = useState(false);
   const [errorEmployees, setErrorEmployees] = useState<string | null>(null);
+
+  const drivers = employees.filter((employee) => employee.type === "DRIVER");
+
+  const assistants = employees.filter(
+    (employee) => employee.type === "ASSISTANT",
+  );
 
   async function fetchVehicleListData() {
     setLoadingVehicles(true);
@@ -83,7 +90,7 @@ function StepVehicle({
         registerType={STEP_TYPE.VEHICLE}
         handleNewRegisterChange={handleNewRegisterChange}
       />
-      <div className="content-separator"></div>
+      <div className="content-separator-horizontal"></div>
       <section className="step-vehicle_content">
         <div className="step-vehicle_lists">
           <h3 className="step-list-titles">Veículos</h3>
@@ -102,6 +109,7 @@ function StepVehicle({
             ) : (
               vehicles.map((vehicle) => (
                 <SelectableCard
+                  key={vehicle.id}
                   icon={<LocalShippingOutlinedIcon sx={{ fontSize: 16 }} />}
                   title={vehicle.plate}
                   subtitle={
@@ -109,14 +117,17 @@ function StepVehicle({
                       {vehicle.model} - {vehicle.color}
                     </>
                   }
+                  isSelected={currentStepData.vehicle?.id === vehicle.id}
+                  onClick={() => handleSelectVehicleStep(vehicle)}
                 />
               ))
             )}
           </div>
         </div>
+        <div className="content-separator-vertical"></div>
         <div className="step-vehicle_lists">
-          <h3 className="step-list-titles">Motoristas e Assistentes</h3>
-          <div className="step-vehicle_list-employees">
+          <h3 className="step-list-titles">Motoristas</h3>
+          <div className="step-vehicle_list-drivers">
             {loadingEmployees ? (
               <div className="loading-skeleton">Carregando dados...</div>
             ) : errorEmployees ? (
@@ -126,24 +137,55 @@ function StepVehicle({
                   Tentar novamente
                 </button>
               </div>
-            ) : !vehicles.length ? (
-              <p>Ainda sem funcionários</p>
+            ) : !drivers.length ? (
+              <p>Ainda sem motoristas</p>
             ) : (
-              employees.map((employee) => (
+              drivers.map((driver) => (
                 <SelectableCard
-                  key={employee.id}
+                  key={driver.id}
                   icon={<PersonOutlineOutlinedIcon sx={{ fontSize: 16 }} />}
-                  title={
-                    employee.type === "DRIVER" ? "MOTORISTA" : "ASSISTENTE"
+                  title="MOTORISTA"
+                  subtitle={driver.user.name}
+                  isSelected={currentStepData.driver?.id === driver.id}
+                  onClick={() => handleSelectVehicleUserStep(driver, "driver")}
+                />
+              ))
+            )}
+          </div>
+        </div>
+        <div className="content-separator-vertical"></div>
+        <div className="step-vehicle_lists">
+          <h3 className="step-list-titles">Assistentes</h3>
+          <div className="step-vehicle_list-assistants">
+            {loadingEmployees ? (
+              <div className="loading-skeleton">Carregando dados...</div>
+            ) : errorEmployees ? (
+              <div>
+                <span>{errorVehicles}</span>
+                <button className="button-retry" onClick={fetchVehicleListData}>
+                  Tentar novamente
+                </button>
+              </div>
+            ) : !assistants.length ? (
+              <p>Ainda sem assistentes</p>
+            ) : (
+              assistants.map((assistant) => (
+                <SelectableCard
+                  key={assistant.id}
+                  icon={<PersonOutlineOutlinedIcon sx={{ fontSize: 16 }} />}
+                  title="ASSISTENTE"
+                  subtitle={assistant.user.name}
+                  isSelected={currentStepData.assistant?.id === assistant.id}
+                  onClick={() =>
+                    handleSelectVehicleUserStep(assistant, "assistant")
                   }
-                  subtitle={employee.user.name}
                 />
               ))
             )}
           </div>
         </div>
       </section>
-      <div className="content-separator"></div>
+      <div className="content-separator-horizontal"></div>
       <div className="step-vehicle_footer">
         <ActionButton
           onClick={onNext}
