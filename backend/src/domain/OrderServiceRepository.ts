@@ -32,7 +32,12 @@ export type OrderServices = Prisma.OrderServiceGetPayload<{
     }
 }>
 
+export interface FindById{
+    id: string;
+}
+
 export abstract class OrderServiceRepository{
     abstract create({vehicleUserId, date, addressId, status}: CreateOrderService):Promise<OrderService>
     abstract findAll():Promise<OrderServices[]>
+    abstract findById({id}: FindById):Promise<OrderServices | null>
 }
