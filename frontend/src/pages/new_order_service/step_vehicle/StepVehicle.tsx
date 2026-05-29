@@ -7,6 +7,7 @@ import {
 } from "../../../types/newOrder";
 import StepHeader from "../step_header/StepHeader";
 import SelectableCard from "../../../components/selectable_card/SelectableCard";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
@@ -87,9 +88,21 @@ function StepVehicle({
         currentStep={currentStep}
         stepTitle="Selecionar Veiculo"
         stepSubtitle="Escolha o veiculo e a equipe que realizara o servico"
-        registerType={STEP_TYPE.VEHICLE}
-        handleNewRegisterChange={handleNewRegisterChange}
-      />
+      >
+        {
+          <ActionButton
+            onClick={() =>
+              handleNewRegisterChange &&
+              handleNewRegisterChange(STEP_TYPE.VEHICLE)
+            }
+            disabled={false}
+            startIcon={<AddOutlinedIcon fontSize="small" />}
+            variant="primary"
+          >
+            Novo
+          </ActionButton>
+        }
+      </StepHeader>
       <div className="content-separator-horizontal"></div>
       <section className="step-vehicle_content">
         <div className="step-vehicle_lists">

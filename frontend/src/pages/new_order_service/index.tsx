@@ -26,9 +26,12 @@ import {
   STEP_TYPE,
   type StepNumber,
   STEPS,
+  type StepConfig,
 } from "../../types/newOrder";
 import VehicleForm from "./vehicle_form/VehicleForm";
 import StepVehicle from "./step_vehicle/StepVehicle";
+import CustomerForm from "./customer_form/CustomerForm";
+import StepCustomer from "./step_customer/StepCustomer";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -56,20 +59,29 @@ export function validateRequiredFields<T extends object>(
 function NewOrderService() {
   const [currentStep, setCurrentStep] = useState<StepNumber>(1);
   const [maxVisitedStep, setMaxVisitedStep] = useState<StepNumber>(1);
-  const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
+  const [completedSteps, setCompletedSteps] = useState<Set<StepNumber>>(
+    new Set(),
+  );
   const [currentStepData, setCurrentStepData] =
-    useState<StepData>(mockStepData); // mockStepData | initialStepData
+    useState<StepData>(initialStepData); // mockStepData | initialStepData
   const [registerType, setRegisterType] = useState<RegisterType | null>(null);
 
   // Para chamar os formulários de criar novo durante a step
   const isModalOpen = registerType !== null;
   const registerFormConfig = {
     [STEP_TYPE.VEHICLE]: VehicleForm,
-    //[REGISTER_TYPE.CUSTOMER]: CustomerForm,
+    [STEP_TYPE.CUSTOMER]: CustomerForm,
   };
   const CurrentRegisterForm = registerType
     ? registerFormConfig[registerType]
     : null;
+
+  // Permite ir para as steps já visitadas
+  const handleStepChange = (step: StepNumber) => {
+    if (step <= maxVisitedStep) {
+      setCurrentStep(step);
+    }
+  };
 
   // Concluir step atual, marca step seguinte como visitada e avança para ela
   const handleNextStep = () => {
@@ -98,13 +110,6 @@ function NewOrderService() {
   const onNext = currentStep < 4 ? handleNextStep : undefined;
   const onBack = currentStep > 1 ? prevStep : undefined;
 
-  // Permite ir para as steps já visitadas
-  const handleStepChange = (step: StepNumber) => {
-    if (step <= maxVisitedStep) {
-      setCurrentStep(step);
-    }
-  };
-
   // Atualiza os dados no resumo vindos da step atual
   const updateStepData = <K extends keyof StepData>(
     field: K,
@@ -122,15 +127,15 @@ function NewOrderService() {
       validations: [
         {
           field: "vehicle",
-          requiredFields: requiredVehicleFields as string[],
+          requiredFields: requiredVehicleFields,
         },
         {
           field: "driver",
-          requiredFields: requiredVehicleUserFields as string[],
+          requiredFields: requiredVehicleUserFields,
         },
         {
           field: "assistant",
-          requiredFields: requiredVehicleUserFields as string[],
+          requiredFields: requiredVehicleUserFields,
         },
       ],
     },
@@ -139,11 +144,11 @@ function NewOrderService() {
       validations: [
         {
           field: "customer",
-          requiredFields: requiredCustomerFields as string[],
+          requiredFields: requiredCustomerFields,
         },
         {
           field: "address",
-          requiredFields: requiredAddressFields as string[],
+          requiredFields: requiredAddressFields,
         },
       ],
     },
@@ -226,12 +231,19 @@ function NewOrderService() {
   };
 
   // Configuração de props por step específica
-  const stepsConfig = [
+  const stepsConfig: StepConfig[] = [
     {
       component: StepVehicle,
       props: {
         handleSelectVehicleStep,
         handleSelectVehicleUserStep,
+      },
+    },
+    {
+      component: StepCustomer,
+      props: {
+        handleSelectCustomerStep,
+        handleSelectAddressStep,
       },
     },
   ];

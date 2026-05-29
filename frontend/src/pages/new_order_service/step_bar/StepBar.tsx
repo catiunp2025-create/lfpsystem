@@ -1,12 +1,12 @@
 import { type Step, steppers } from "../../../constants/newOrder";
-import type { StepNumber } from "../../../types/newOrder";
+import type { StepNumber, StepStatus } from "../../../types/newOrder";
 import "./style.css";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 
 type SteppersProps = {
   currentStep?: number;
   maxVisitedStep?: number;
-  completedSteps: Set<number>;
+  completedSteps: Set<StepNumber>;
   onStepChange?: (step: StepNumber) => void;
 };
 
@@ -18,33 +18,44 @@ export function Steppers({
 }: SteppersProps) {
   const steps: Step[] = steppers;
 
+  // Configura visual das steps de acordo com estado para cada step
+  function getStepStatus(step: StepNumber): StepStatus {
+    if (step === currentStep) {
+      return "active";
+    }
+
+    if (completedSteps.has(step)) {
+      return "completed";
+    }
+
+    if (step <= maxVisitedStep) {
+      return "visited";
+    }
+
+    return "inactive";
+  }
+
   return (
     <nav className="steppers-container" aria-label="Progresso do formulário">
       {steps.map((step, index) => {
-        const isActive = step.id === currentStep;
-        const isCompleted = completedSteps.has(step.id);
-        const isVisited = step.id <= maxVisitedStep;
+        const status = getStepStatus(step.id);
 
         return (
           <div key={step.id} className="stepper-item">
             <button
               type="button"
-              onClick={() => isVisited && onStepChange?.(step.id as StepNumber)}
-              className={`step-button ${
-                isActive
-                  ? "active"
-                  : isCompleted
-                    ? "completed"
-                    : isVisited
-                      ? "visited"
-                      : "inactive"
-              }`}
-              disabled={!isVisited}
-              aria-current={isActive ? "step" : undefined}
+              onClick={() => status !== "inactive" && onStepChange?.(step.id)}
+              className={`step-button ${status}`}
+              disabled={status === "inactive"}
+              aria-current={status === "active" ? "step" : undefined}
               aria-label={`Ir para etapa ${step.id}: ${step.title}`}
             >
               <span className="step-symbol">
-                {isCompleted ? <CheckOutlinedIcon fontSize="small" /> : step.id}
+                {status === "completed" ? (
+                  <CheckOutlinedIcon fontSize="small" />
+                ) : (
+                  step.id
+                )}
               </span>
 
               <div className="step-details">
@@ -54,7 +65,7 @@ export function Steppers({
             </button>
             {index < steps.length - 1 && (
               <div
-                className={`step-connector ${isCompleted ? "completed" : ""}`}
+                className={`step-connector ${status === "completed" ? "completed" : ""}`}
               ></div>
             )}
           </div>

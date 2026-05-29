@@ -1,0 +1,55 @@
+@import "../../../styles/variables.css";
+
+.step-customer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-height: 0;
+}
+
+.step-customer_content {
+  flex: 1;
+
+  display: flex;
+  justify-items: center;
+
+  background: transparent;
+
+  gap: var(--spacing-md);
+  padding: 10px;
+  border-radius: 10px;
+
+  min-height: 0;
+}
+
+.step-customer_list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.step-customer_addresses {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: 8px;
+  margin-left: 24px;
+  margin-right: 8px;
+  padding-left: 16px;
+
+  border-left: 2px solid var(--color-border-light);
+}
+
+.step-customer_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

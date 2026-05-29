@@ -1,12 +1,18 @@
+@import "../../../styles/variables.css";
+
 .step-header {
   display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 
   font-family: "Inter", sans-serif;
   width: 100%;
   min-height: 0;
+  gap: var(--spacing-lg);
 }
 
 .step-header_details {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -16,8 +22,7 @@
   color: var(--color-primary-dark);
 }
 
-.step-header_button-new {
-  flex: 1;
+.step-header_actions {
   display: flex;
   align-items: end;
   justify-content: flex-end;

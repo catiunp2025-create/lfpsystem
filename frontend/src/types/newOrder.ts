@@ -12,6 +12,8 @@ export const STEPS = [1, 2, 3, 4] as const;
 
 export type StepNumber = (typeof STEPS)[number];
 
+export type StepStatus = "active" | "completed" | "visited" | "inactive";
+
 export type BaseStepProps = {
   currentStep: number;
   currentStepData: StepData;
@@ -42,6 +44,12 @@ export type TypeVehicleUser =
 
 export const STEP_TYPE = {
   VEHICLE: "vehicle",
+  CUSTOMER: "customer",
 } as const;
 
 export type RegisterType = (typeof STEP_TYPE)[keyof typeof STEP_TYPE];
+
+export type StepConfig = {
+  component: React.ComponentType<any>;
+  props?: Record<string, unknown>;
+};

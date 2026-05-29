@@ -4,10 +4,10 @@ import type {
   Vehicle,
   VehicleUser,
 } from "../../../packages/shared/src";
-import type { StepData } from "../types/newOrder";
+import type { StepData, StepNumber } from "../types/newOrder";
 
 export type Step = {
-  id: number;
+  id: StepNumber;
   title: string;
   subTitle: string;
 };

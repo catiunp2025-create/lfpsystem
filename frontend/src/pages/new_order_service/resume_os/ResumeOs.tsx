@@ -124,7 +124,7 @@ export function ResumeOs({ currentStepData }: ResumeOsProps) {
           <p className="resume-os_label">SERVICOS</p>
           {currentStepData.services.length > 0 ? (
             currentStepData.services.map((service) => (
-              <div className="resume-os_list-services">
+              <div key={service.id} className="resume-os_list-services">
                 <p className="resume-os_primary">{service.name}</p>
                 <span className="resume-os_secondary">
                   R$ {service.value.toFixed(2)}
