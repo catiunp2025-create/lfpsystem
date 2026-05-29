@@ -8,6 +8,7 @@ import { PrismaOrderServiceRepository } from "src/external/repositories/remote/P
 import { PrismaServiceOrderServiceRepository } from "src/external/repositories/remote/PrismaServiceOrderServiceRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateOrderSericeUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
+import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
 import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
 
 @Module({
@@ -22,6 +23,7 @@ import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServ
     providers: [
         CreateOrderSericeUseCase,
         ListOrderServiceUseCase,
+        FindOrderServiceUseCase,
         JwtStrategy,
         {
             provide: OrderServiceRepository,

@@ -1,7 +1,7 @@
 import { OrderService } from "@prisma/client";
 import { PrismaRemoteRepository } from "./PrismaRemoteRepository";
 import { Injectable } from "@nestjs/common";
-import { CreateOrderService, OrderServiceRepository, OrderServices } from "src/domain/OrderServiceRepository";
+import { CreateOrderService, FindById, OrderServiceRepository, OrderServices } from "src/domain/OrderServiceRepository";
 
 @Injectable()
 export class PrismaOrderServiceRepository implements OrderServiceRepository{
@@ -15,6 +15,34 @@ export class PrismaOrderServiceRepository implements OrderServiceRepository{
 
     findAll(): Promise<OrderServices[]> {
         return this.repository.orderService.findMany({
+            include:{
+                vehicleUser:{
+                    include:{
+                        vehicle:true,
+                        user: true
+                    }
+                },
+                address:{
+                    include:{
+                        customer:{
+                            include:{
+                                contact: true
+                            }
+                        }
+                    }
+                },
+                services:{
+                    include:{
+                        service: true
+                    }
+                }
+            }
+        });
+    }
+
+    findById({id}: FindById): Promise<OrderServices | null> {
+        return this.repository.orderService.findFirst({
+            where:{id},
             include:{
                 vehicleUser:{
                     include:{
