@@ -19,7 +19,12 @@ export type Users = {
 
 }
 
+export type FindById = {
+    id: string;
+}
+
 export abstract class UserRepository {
     abstract create({name, role, email, password}: Create): Promise<User>;
     abstract findAll():Promise<Users[]>;
+    abstract findById({id}: FindById):Promise<Users | null>
 }
