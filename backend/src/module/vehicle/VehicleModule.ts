@@ -6,6 +6,7 @@ import { VehicleRepository } from "src/domain/VehicleRepository";
 import { PrismaVehicleRepository } from "src/external/repositories/remote/PrismaVehicleRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateVehicleUseCase } from "src/usecase/vehicle/CreateVehicleUseCase";
+import { FindVehicleUseCase } from "src/usecase/vehicle/FindVehicleUserCase";
 import { ListVehicleUseCase } from "src/usecase/vehicle/ListVehicleUseCase";
 
 @Module({
@@ -20,6 +21,7 @@ import { ListVehicleUseCase } from "src/usecase/vehicle/ListVehicleUseCase";
     providers: [
         CreateVehicleUseCase,
         ListVehicleUseCase,
+        FindVehicleUseCase,
         JwtStrategy,
         {
             provide: VehicleRepository,
