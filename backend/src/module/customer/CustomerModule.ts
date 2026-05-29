@@ -8,6 +8,7 @@ import { PrismaCustomerRepository } from "src/external/repositories/remote/Prism
 import { PrismaIdentificationRepository } from "src/external/repositories/remote/PrismaIdentificationRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateCustomerUseCase } from "src/usecase/customer/CreateCustomerUseCase";
+import { FindCustomerUseCase } from "src/usecase/customer/FindCustomerUseCase";
 import { ListCustomerUseCase } from "src/usecase/customer/ListCustomerUseCase";
 
 @Module({
@@ -22,6 +23,7 @@ import { ListCustomerUseCase } from "src/usecase/customer/ListCustomerUseCase";
     providers: [
         CreateCustomerUseCase,
         ListCustomerUseCase,
+        FindCustomerUseCase,
         JwtStrategy,
         {
             provide: CustomerRepository,
