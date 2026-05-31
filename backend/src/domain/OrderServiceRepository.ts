@@ -36,8 +36,14 @@ export interface FindById{
     id: string;
 }
 
+export interface UpdateStatus{
+    id: string;
+    status: OrderServiceStatus;
+}
+
 export abstract class OrderServiceRepository{
     abstract create({vehicleUserId, date, addressId, status}: CreateOrderService):Promise<OrderService>
     abstract findAll():Promise<OrderServices[]>
     abstract findById({id}: FindById):Promise<OrderServices | null>
+    abstract updateStatus({id, status}: UpdateStatus):Promise<OrderService>
 }
