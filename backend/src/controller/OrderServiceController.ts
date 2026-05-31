@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
-import { OrderService, Role } from "@prisma/client";
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { OrderService, OrderServiceStatus, Role } from "@prisma/client";
 import { Roles } from "src/decorators/Roles.decorator";
 import { OrderServices } from "src/domain/OrderServiceRepository";
 import { JwtAuthGuard } from "src/guards/JwtAuthGuard";
@@ -8,13 +8,15 @@ import { CreateOrderServiceDTO } from "src/shared/dtos/order_service/CreateOrder
 import { CreateOrderSericeUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
 import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
 import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
+import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/UpdateStatusOrderServiceUseCase";
 
 @Controller('/order-services')
 export class OrderServiceController{
     constructor(
         private readonly createOrderServiceUseCase: CreateOrderSericeUseCase,
         private readonly listOrderServiceUseCase: ListOrderServiceUseCase,
-        private readonly findOrderServiceUseCase: FindOrderServiceUseCase
+        private readonly findOrderServiceUseCase: FindOrderServiceUseCase,
+        private readonly updateStatusOrderServiceUseCase: UpdateStatusOrderServiceUseCase
     ){}
 
 
@@ -37,5 +39,14 @@ export class OrderServiceController{
     @Roles(Role.MANAGER)
     findById(@Param('id') id: string):Promise<OrderServices | null>{
         return this.findOrderServiceUseCase.execute({id});
+    }
+
+    @Patch(':id/status')
+    @UseGuards(JwtAuthGuard)
+    updateStatus(
+        @Param('id') id:string,
+        @Body('status') status: OrderServiceStatus
+    ):Promise<OrderService>{
+        return this.updateStatusOrderServiceUseCase.execute({id, status});
     }
 }
