@@ -91,7 +91,7 @@ function StepCustomer({
         {
           <div className="step-customer_list">
             {customerLoading ? (
-              <div className="loading-skeleton">Carregando dados...</div>
+              <p>Carregando dados...</p>
             ) : customerError ? (
               <div>
                 <span>{customerError}</span>

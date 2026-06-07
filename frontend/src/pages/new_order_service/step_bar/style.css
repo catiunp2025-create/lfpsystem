@@ -110,8 +110,16 @@
 }
 
 .step-button.visited .step-symbol {
-  background-color: #fde68a;
-  color: #92400e;
+  background-color: #eaecf1;
+  color: var(--color-text-muted);
+}
+
+.step-button.visited .step-title {
+  color: var(--color-text-muted);
+}
+
+.step-button.visited .step-subtitle {
+  color: var(--color-text-secondary);
 }
 
 .stepper-item:last-child {

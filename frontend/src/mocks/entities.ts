@@ -148,3 +148,58 @@ export const mockCustomers: Customer[] = [
     contact: [mockContacts[0]],
   },
 ];
+
+export const mockServices: Service[] = [
+  {
+    id: "svc_dedet_res_001",
+    name: "Dedetizacao Residencial",
+    value: 350.0,
+    description:
+      "Controle de pragas em ambientes residenciais com produtos atóxicos.",
+  },
+  {
+    id: "svc_dedet_com_002",
+    name: "Dedetacao Comercial",
+    value: 580.0,
+    description:
+      "Tratamento completo para estabelecimentos comerciais e escritórios.",
+  },
+  {
+    id: "svc_desrat_003",
+    name: "Desratizacao",
+    value: 420.0,
+    description: "Controle e eliminação de roedores com iscas profissionais.",
+  },
+  {
+    id: "svc_descup_004",
+    name: "Descupinizacao",
+    value: 750.0,
+    description:
+      "Tratamento contra cupins em estruturas de madeira e alvenaria.",
+  },
+  {
+    id: "svc_limpeza_caixa_005",
+    name: "Limpeza de Caixa d'Agua",
+    value: 280.0,
+    description: "Higienização e desinfecção de reservatórios de água.",
+  },
+  {
+    id: "svc_controle_mosquito_006",
+    name: "Controle de Mosquitos",
+    value: 390.0,
+    description:
+      "Nebulização e larvicida para controle de Aedes e outros mosquitos.",
+  },
+  {
+    id: "svc_sanitizacao_007",
+    name: "Sanitizacao de Ambientes",
+    value: 450.0,
+    description: "Desinfecção profissional de ambientes internos.",
+  },
+  {
+    id: "svc_laudo_008",
+    name: "Laudo Tecnico",
+    value: 200.0,
+    description: "Emissão de laudo tecnico para ANVISA e vigilância sanitária.",
+  },
+];

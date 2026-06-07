@@ -18,6 +18,7 @@ import type {
 } from "../../types/dashboard";
 import { mockServiceOrders } from "../../mocks/dashboard.mock";
 import MainLayout from "../../components/layout/MainLayout";
+import { formatCurrency } from "../../utils/FormatCurrency";
 
 function formatApiData(allOrderService: AllOrderService[]): ApiData[] {
   const apiData = allOrderService.reduce<Record<string, ApiData>>((acc, os) => {
@@ -190,7 +191,7 @@ function Home() {
             <span className="card-title">Faturamento {dataMonth}</span>
             {currentCardData ? (
               <div>
-                <h2>R$ {currentCardData.total.toLocaleString("pt-BR")}</h2>
+                <h2>{formatCurrency(currentCardData.total)}</h2>
                 {previousCardData && (
                   <p className="card-sub">
                     {Math.round(
@@ -284,7 +285,7 @@ function Home() {
                         color: "#fff",
                       }}
                       labelStyle={{ color: "#dbd4e3" }}
-                      formatter={(value) => [`R$ ${value}`, "Faturamento"]}
+                      formatter={(value) => [formatCurrency(value), "Faturamento"]}
                     />
                     <Bar
                       dataKey="total"

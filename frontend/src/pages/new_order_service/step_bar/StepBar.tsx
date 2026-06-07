@@ -5,14 +5,14 @@ import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 
 type SteppersProps = {
   currentStep?: number;
-  maxVisitedStep?: number;
+  visitedSteps?: Set<StepNumber>;
   completedSteps: Set<StepNumber>;
   onStepChange?: (step: StepNumber) => void;
 };
 
 export function Steppers({
   currentStep = 1,
-  maxVisitedStep = 1,
+  visitedSteps = 1,
   completedSteps,
   onStepChange,
 }: SteppersProps) {
@@ -28,7 +28,7 @@ export function Steppers({
       return "completed";
     }
 
-    if (step <= maxVisitedStep) {
+    if (visitedSteps.has(step)) {
       return "visited";
     }
 

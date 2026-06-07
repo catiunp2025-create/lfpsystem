@@ -6,6 +6,7 @@ import { useState } from "react";
 import type {
   Address,
   Customer,
+  Service,
   Vehicle,
   VehicleUser,
 } from "../../../../packages/shared/src/index";
@@ -17,7 +18,6 @@ import {
   requiredVehicleFields,
   requiredVehicleUserFields,
 } from "../../constants/newOrder";
-import { mockStepData } from "../../mocks/stepdata.mock";
 import {
   type BaseStepProps,
   type RegisterType,
@@ -32,6 +32,7 @@ import VehicleForm from "./vehicle_form/VehicleForm";
 import StepVehicle from "./step_vehicle/StepVehicle";
 import CustomerForm from "./customer_form/CustomerForm";
 import StepCustomer from "./step_customer/StepCustomer";
+import StepServices from "./step_services/StepServices";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -58,15 +59,15 @@ export function validateRequiredFields<T extends object>(
 
 function NewOrderService() {
   const [currentStep, setCurrentStep] = useState<StepNumber>(1);
-  const [maxVisitedStep, setMaxVisitedStep] = useState<StepNumber>(1);
+  const [visitedSteps, setVisitedSteps] = useState<Set<StepNumber>>(new Set());
   const [completedSteps, setCompletedSteps] = useState<Set<StepNumber>>(
     new Set(),
   );
   const [currentStepData, setCurrentStepData] =
-    useState<StepData>(initialStepData); // mockStepData | initialStepData
-  const [registerType, setRegisterType] = useState<RegisterType | null>(null);
+    useState<StepData>(initialStepData);
 
   // Para chamar os formulários de criar novo durante a step
+  const [registerType, setRegisterType] = useState<RegisterType | null>(null);
   const isModalOpen = registerType !== null;
   const registerFormConfig = {
     [STEP_TYPE.VEHICLE]: VehicleForm,
@@ -78,24 +79,21 @@ function NewOrderService() {
 
   // Permite ir para as steps já visitadas
   const handleStepChange = (step: StepNumber) => {
-    if (step <= maxVisitedStep) {
+    if (visitedSteps.has(step) || completedSteps.has(step)) {
       setCurrentStep(step);
     }
   };
 
   // Concluir step atual, marca step seguinte como visitada e avança para ela
   const handleNextStep = () => {
+    const nextStep =
+      currentStep === STEPS.length
+        ? currentStep
+        : ((currentStep + 1) as StepNumber);
+
     setCompletedSteps((prev) => new Set(prev).add(currentStep));
-
-    setCurrentStep((prev) => {
-      if (prev === STEPS.length) return prev;
-
-      return (prev + 1) as StepNumber;
-    });
-
-    if (currentStep > maxVisitedStep) {
-      setMaxVisitedStep(currentStep);
-    }
+    setVisitedSteps((prev) => new Set(prev).add(nextStep));
+    setCurrentStep(nextStep);
   };
 
   // Volta para a step anterior
@@ -215,6 +213,24 @@ function NewOrderService() {
     updateStepData(vehicleUserType, vehicleUser);
   };
 
+  // Atualiza dados dos services no resumo, de acordo com services com checkbox marcados
+  const handleToggleService = (service: Service) => {
+    const alreadySelected = currentStepData.services.some(
+      (item) => item.id === service.id,
+    );
+
+    if (alreadySelected) {
+      updateStepData(
+        "services",
+        currentStepData.services.filter((item) => item.id !== service.id),
+      );
+
+      return;
+    }
+
+    updateStepData("services", [...currentStepData.services, service]);
+  };
+
   // Aciona form de novo registro de vehicle ou customer, de acordo com step atual
   const handleNewRegisterChange = (type: RegisterType) => {
     setRegisterType(type);
@@ -246,6 +262,12 @@ function NewOrderService() {
         handleSelectAddressStep,
       },
     },
+    {
+      component: StepServices,
+      props: {
+        handleToggleService,
+      },
+    },
   ];
 
   // Define a step atual a ser renderizada com suas determinadas props
@@ -255,7 +277,7 @@ function NewOrderService() {
     <MainLayout pageTitle="Nova ordem de serviço">
       <Steppers
         currentStep={currentStep}
-        maxVisitedStep={maxVisitedStep}
+        visitedSteps={visitedSteps}
         completedSteps={completedSteps}
         onStepChange={handleStepChange}
       />

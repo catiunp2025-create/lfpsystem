@@ -145,7 +145,7 @@ export function ResumeOs({ currentStepData }: ResumeOsProps) {
           <p className="resume-os_label">DATA PREVISTA</p>
           {currentStepData.scheduleDate ? (
             <p className="resume-os_primary">
-              {currentStepData.scheduleDate.toLocaleString("pt-BR")}
+              {currentStepData.scheduleDate.toLocaleDateString("pt-BR")}
             </p>
           ) : (
             <p className="resume-os_value-empty">Não definida</p>
