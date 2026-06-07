@@ -20,10 +20,10 @@ import {
 } from "../../constants/newOrder";
 import {
   type BaseStepProps,
-  type RegisterType,
+  type ModalType,
   type StepData,
   type TypeVehicleUser,
-  STEP_TYPE,
+  MODAL_TYPE,
   type StepNumber,
   STEPS,
   type StepConfig,
@@ -33,6 +33,8 @@ import StepVehicle from "./step_vehicle/StepVehicle";
 import CustomerForm from "./customer_form/CustomerForm";
 import StepCustomer from "./step_customer/StepCustomer";
 import StepServices from "./step_services/StepServices";
+import StepFinal from "./step_final/StepFinal";
+import OrderReview from "./order_review/OrderReview";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -66,16 +68,14 @@ function NewOrderService() {
   const [currentStepData, setCurrentStepData] =
     useState<StepData>(initialStepData);
 
-  // Para chamar os formulários de criar novo durante a step
-  const [registerType, setRegisterType] = useState<RegisterType | null>(null);
-  const isModalOpen = registerType !== null;
-  const registerFormConfig = {
-    [STEP_TYPE.VEHICLE]: VehicleForm,
-    [STEP_TYPE.CUSTOMER]: CustomerForm,
+  // Para chamar abrir os modals de novo registro e confirmação da OS
+  const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+  const modalsConfig = {
+    [MODAL_TYPE.VEHICLE]: VehicleForm,
+    [MODAL_TYPE.CUSTOMER]: CustomerForm,
+    [MODAL_TYPE.ORDER_REVIEW]: OrderReview,
   };
-  const CurrentRegisterForm = registerType
-    ? registerFormConfig[registerType]
-    : null;
+  const CurrentModalOpen = activeModal ? modalsConfig[activeModal] : null;
 
   // Permite ir para as steps já visitadas
   const handleStepChange = (step: StepNumber) => {
@@ -156,7 +156,7 @@ function NewOrderService() {
     },
 
     4: {
-      validate: () => currentStepData.scheduleDate !== null,
+      validate: () => currentStepData.scheduleDate !== undefined,
     },
   } as const;
 
@@ -231,9 +231,24 @@ function NewOrderService() {
     updateStepData("services", [...currentStepData.services, service]);
   };
 
-  // Aciona form de novo registro de vehicle ou customer, de acordo com step atual
-  const handleNewRegisterChange = (type: RegisterType) => {
-    setRegisterType(type);
+  // Atualiza data prevista no resumo, de acordo com seleção no DatePicker
+  const handleScheduleDateChange = (scheduleDate: string | null) => {
+    updateStepData("scheduleDate", scheduleDate);
+  };
+
+  // Atualiza observações no resumo, de acordo com texto escrito
+  const handleObservationsChange = (observations: string) => {
+    updateStepData("observations", observations);
+  };
+
+  // Aciona modal para novo registro ou confirmar OS, de acordo com step atual
+  const handleOpenModal = (type: ModalType) => {
+    setActiveModal(type);
+  };
+
+  // Fecha modal aberto, de acordo com step atual
+  const handleCloseModal = () => {
+    setActiveModal(null);
   };
 
   // Props base para todas as steps
@@ -243,7 +258,8 @@ function NewOrderService() {
     onNext,
     onBack,
     validateStep,
-    handleNewRegisterChange,
+    handleOpenModal,
+    handleCloseModal,
   };
 
   // Configuração de props por step específica
@@ -266,6 +282,13 @@ function NewOrderService() {
       component: StepServices,
       props: {
         handleToggleService,
+      },
+    },
+    {
+      component: StepFinal,
+      props: {
+        handleScheduleDateChange,
+        handleObservationsChange,
       },
     },
   ];

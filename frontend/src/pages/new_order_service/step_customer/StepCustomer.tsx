@@ -1,6 +1,6 @@
 import "./style.css";
 import StepHeader from "../step_header/StepHeader";
-import { STEP_TYPE, type BaseStepProps } from "../../../types/newOrder";
+import { MODAL_TYPE, type BaseStepProps } from "../../../types/newOrder";
 import type { Address, Customer } from "../../../../../packages/shared/src";
 import ActionButton from "../../../components/action_button/ActionButton";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
@@ -25,7 +25,7 @@ function StepCustomer({
   onBack,
   onNext,
   validateStep,
-  handleNewRegisterChange,
+  handleOpenModal,
   handleSelectCustomerStep,
   handleSelectAddressStep,
 }: StepCustomerProps) {
@@ -77,8 +77,7 @@ function StepCustomer({
 
         <ActionButton
           onClick={() =>
-            handleNewRegisterChange &&
-            handleNewRegisterChange(STEP_TYPE.CUSTOMER)
+            handleOpenModal && handleOpenModal(MODAL_TYPE.CUSTOMER)
           }
           disabled={false}
           startIcon={<AddOutlinedIcon fontSize="small" />}
@@ -138,7 +137,7 @@ function StepCustomer({
           onClick={onBack}
           disabled={false}
           variant="secondary"
-          endIcon={<KeyboardBackspaceOutlinedIcon fontSize="small" />}
+          startIcon={<KeyboardBackspaceOutlinedIcon fontSize="small" />}
         >
           Voltar
         </ActionButton>

@@ -15,6 +15,7 @@ import {
 import "./style.css";
 import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import dayjs from "dayjs";
 
 type ResumeOsProps = {
   currentStepData: StepData;
@@ -144,9 +145,7 @@ export function ResumeOs({ currentStepData }: ResumeOsProps) {
         <section>
           <p className="resume-os_label">DATA PREVISTA</p>
           {currentStepData.scheduleDate ? (
-            <p className="resume-os_primary">
-              {currentStepData.scheduleDate.toLocaleDateString("pt-BR")}
-            </p>
+            <p className="resume-os_primary">{dayjs(currentStepData.scheduleDate).format("DD/MM/YYYY")}</p>
           ) : (
             <p className="resume-os_value-empty">Não definida</p>
           )}

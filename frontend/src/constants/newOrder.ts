@@ -134,5 +134,5 @@ export const initialStepData: StepData = {
   },
   address: initialAddress,
   services: [],
-  scheduleDate: new Date(),
+  scheduleDate: null,
 };

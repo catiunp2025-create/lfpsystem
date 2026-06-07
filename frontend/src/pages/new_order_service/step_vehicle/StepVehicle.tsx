@@ -1,7 +1,7 @@
 import "./style.css";
 import type { Vehicle, VehicleUser } from "../../../../../packages/shared/src";
 import {
-  STEP_TYPE,
+  MODAL_TYPE,
   type BaseStepProps,
   type TypeVehicleUser,
 } from "../../../types/newOrder";
@@ -32,7 +32,7 @@ function StepVehicle({
   currentStepData,
   onNext,
   validateStep,
-  handleNewRegisterChange,
+  handleOpenModal,
   handleSelectVehicleStep,
   handleSelectVehicleUserStep,
 }: StepVehicleProps) {
@@ -92,8 +92,7 @@ function StepVehicle({
         {
           <ActionButton
             onClick={() =>
-              handleNewRegisterChange &&
-              handleNewRegisterChange(STEP_TYPE.VEHICLE)
+              handleOpenModal && handleOpenModal(MODAL_TYPE.VEHICLE)
             }
             disabled={false}
             startIcon={<AddOutlinedIcon fontSize="small" />}

@@ -20,7 +20,8 @@ export type BaseStepProps = {
   onNext?: () => void;
   onBack?: () => void;
   validateStep: () => boolean;
-  handleNewRegisterChange?: (type: RegisterType) => void;
+  handleOpenModal?: (type: ModalType) => void;
+  handleCloseModal?: () => void;
 };
 
 export type StepData = {
@@ -30,7 +31,7 @@ export type StepData = {
   customer: Customer;
   address: Address;
   services: Service[];
-  scheduleDate?: Date;
+  scheduleDate: string | null;
   observations?: string;
 };
 
@@ -42,12 +43,13 @@ export const VEHICLE_USER_TYPE = {
 export type TypeVehicleUser =
   (typeof VEHICLE_USER_TYPE)[keyof typeof VEHICLE_USER_TYPE];
 
-export const STEP_TYPE = {
+export const MODAL_TYPE = {
   VEHICLE: "vehicle",
   CUSTOMER: "customer",
+  ORDER_REVIEW: "order_review",
 } as const;
 
-export type RegisterType = (typeof STEP_TYPE)[keyof typeof STEP_TYPE];
+export type ModalType = (typeof MODAL_TYPE)[keyof typeof MODAL_TYPE];
 
 export type StepConfig = {
   component: React.ComponentType<any>;

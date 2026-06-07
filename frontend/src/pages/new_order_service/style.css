@@ -20,6 +20,7 @@
   flex-direction: column;
   min-width: 0;
   min-height: 0;
+  font-family: "Inter", sans-serif;
 }
 
 .resume-content {
@@ -33,7 +34,6 @@
 
   color: var(--color-text-dark-blue);
 
-  font-family: "Inter", sans-serif;
   padding: 5px;
   margin: 10px;
 }

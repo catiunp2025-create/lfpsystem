@@ -52,7 +52,7 @@ function StepServices({
         stepSubtitle="Escolha um ou mais servicos para compor a ordem."
       />
       <div className="content-separator-horizontal"></div>
-      <div className="step-servies_list">
+      <section className="step-servies_list">
         {serviceLoading ? (
           <p>Carregando...</p>
         ) : serviceError ? (
@@ -76,14 +76,14 @@ function StepServices({
             />
           ))
         )}
-      </div>
+      </section>
       <div className="content-separator-horizontal"></div>
       <div className="step-services_footer">
         <ActionButton
           onClick={onBack}
           disabled={false}
           variant="secondary"
-          endIcon={<KeyboardBackspaceOutlinedIcon fontSize="small" />}
+          startIcon={<KeyboardBackspaceOutlinedIcon fontSize="small" />}
         >
           Voltar
         </ActionButton>
