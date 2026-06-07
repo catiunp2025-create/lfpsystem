@@ -8,7 +8,12 @@ export interface Create {
 
 export type Customers = Customer &{identification: Identification, address: Address[], contact: Contact[]}
 
+export interface FindById{
+    id: string;
+}
+
 export abstract class CustomerRepository {
     abstract create({name, type, value}: Create):Promise<Customer>;
     abstract findAll():Promise<Customers[]>;
+    abstract findById({id}: FindById): Promise<Customers | null>;
 }

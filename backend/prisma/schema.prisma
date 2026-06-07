@@ -34,7 +34,6 @@ enum IdentificationType {
 
 enum OrderServiceStatus {
   AVAILABLE
-  WAITING_ASSIGN
   FINISHED
 }
 

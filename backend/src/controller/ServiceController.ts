@@ -1,17 +1,19 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
 import { Role, Service } from "@prisma/client";
 import { Roles } from "src/decorators/Roles.decorator";
 import { JwtAuthGuard } from "src/guards/JwtAuthGuard";
 import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateServiceDTO } from "src/shared/dtos/service/CreateServiceDTO";
 import { CreateServiceUseCase } from "src/usecase/service/CreateServiceUseCase";
+import { FindServiceUseCase } from "src/usecase/service/FindServiceUseCase";
 import { ListServiceUseCase } from "src/usecase/service/ListServiceUseCase";
 
 @Controller('/services')
 export class ServiceController{
     constructor(
         private readonly createServiceUseCase: CreateServiceUseCase,
-        private readonly listServiceUseCase: ListServiceUseCase
+        private readonly listServiceUseCase: ListServiceUseCase,
+        private readonly findServiceUseCase: FindServiceUseCase
     ){}
 
     @Post()
@@ -26,5 +28,12 @@ export class ServiceController{
     @Roles(Role.MANAGER)
     list():Promise<Service[]>{
         return this.listServiceUseCase.execute();
+    }
+
+    @Get(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.MANAGER)
+    findById(@Param() {id}: {id: string}):Promise<Service | null>{
+        return this.findServiceUseCase.execute({id});
     }
 }

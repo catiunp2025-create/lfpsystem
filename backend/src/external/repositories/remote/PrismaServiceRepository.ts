@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Create, FindByName, ServiceRepository } from "src/domain/ServiceRepository";
+import { Create, FindById, FindByName, ServiceRepository } from "src/domain/ServiceRepository";
 import { PrismaRemoteRepository } from "./PrismaRemoteRepository";
 import { Service } from "@prisma/client";
 
@@ -23,4 +23,9 @@ export class PrismaServiceRepository implements ServiceRepository{
         return this.repository.service.findMany();
     }
 
+    findById({ id }: FindById): Promise<Service | null> {
+        return this.repository.service.findFirst({
+            where:{id}
+        })
+    }
 }
