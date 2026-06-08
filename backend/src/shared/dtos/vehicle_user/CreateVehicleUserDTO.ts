@@ -1,14 +1,13 @@
-import { VehicleUserType } from "@prisma/client";
-import { IsEnum, IsNotEmpty, IsString } from "class-validator";
+import { VehicleUserType } from '@prisma/client';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateVehicleUserDTO{
+export class CreateVehicleUserDTO {
+  @IsNotEmpty()
+  @IsString()
+  userId!: string;
 
-    @IsNotEmpty()
-    @IsString()
-    userId!: string;
-
-    @IsNotEmpty()
-    @IsString()
-    @IsEnum(VehicleUserType)
-    type!: VehicleUserType
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(VehicleUserType)
+  type!: VehicleUserType;
 }

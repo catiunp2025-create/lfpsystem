@@ -1,21 +1,21 @@
-import { IsArray, IsDate, IsNotEmpty, IsUUID } from "class-validator";
+import { IsArray, IsDate, IsNotEmpty, IsUUID } from 'class-validator';
 
-export class CreateOrderServiceDTO{
-    @IsNotEmpty()
-    @IsArray()
-    @IsUUID('4', { each: true })
-    vehicleUserIds!: string[];
+export class CreateOrderServiceDTO {
+  @IsNotEmpty()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  vehicleUserIds!: string[];
 
-    @IsNotEmpty()
-    @IsDate()
-    date!: Date;
+  @IsNotEmpty()
+  @IsDate()
+  date!: Date;
 
-    @IsNotEmpty()
-    @IsUUID()
-    addressId!: string;
+  @IsNotEmpty()
+  @IsUUID()
+  addressId!: string;
 
-    @IsNotEmpty()
-    @IsArray()
-    @IsUUID('4', { each: true })
-    serviceIds!: string[];
+  @IsNotEmpty()
+  @IsArray()
+  @IsUUID('4', { each: true })
+  serviceIds!: string[];
 }

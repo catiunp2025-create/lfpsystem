@@ -1,11 +1,11 @@
-import { Role } from "@prisma/client";
+import { Role } from '@prisma/client';
 
 export class TokenDTO {
-    public accessToken!: string;
+  public accessToken!: string;
 }
 
 export class TokenPayloadDTO {
-    public userId!: string;
-    public name!: string;
-    public role!: Role;
+  public userId!: string;
+  public name!: string;
+  public role!: Role;
 }

@@ -1,12 +1,12 @@
-import { Injectable } from "@nestjs/common";
-import { Vehicle } from "@prisma/client";
-import { VehicleRepository } from "src/domain/VehicleRepository";
+import { Injectable } from '@nestjs/common';
+import { Vehicle } from '@prisma/client';
+import { VehicleRepository } from 'src/domain/VehicleRepository';
 
 @Injectable()
 export class ListVehicleUseCase {
-    constructor(private readonly vehicleRepository: VehicleRepository){}
+  constructor(private readonly vehicleRepository: VehicleRepository) {}
 
-    async execute():Promise<Vehicle[]>{
-        return this.vehicleRepository.findAll();
-    }
+  async execute(): Promise<Vehicle[]> {
+    return this.vehicleRepository.findAll();
+  }
 }

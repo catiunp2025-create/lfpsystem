@@ -1,8 +1,8 @@
-import { ConflictException, HttpStatus } from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
+import { ConflictException, HttpStatus } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class AlreadyExistsError extends ConflictException{
-    @ApiProperty({ example: HttpStatus.CONFLICT })
+export class AlreadyExistsError extends ConflictException {
+  @ApiProperty({ example: HttpStatus.CONFLICT })
   public statusCode!: number;
 
   @ApiProperty({ type: () => String })

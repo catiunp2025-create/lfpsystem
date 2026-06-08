@@ -13,7 +13,18 @@ import { ServiceModule } from './module/service/ServiceModule';
 import { OrderServiceModule } from './module/order_service/OrderServiceModule';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UserModule, CustomerModule, ContactModule, AddressModule,VehicleModule, VehicleUserModule, ServiceModule, OrderServiceModule],
+  imports: [
+    PrismaModule,
+    AuthModule,
+    UserModule,
+    CustomerModule,
+    ContactModule,
+    AddressModule,
+    VehicleModule,
+    VehicleUserModule,
+    ServiceModule,
+    OrderServiceModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

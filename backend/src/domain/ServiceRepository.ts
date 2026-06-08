@@ -1,22 +1,22 @@
-import { Service } from "@prisma/client";
+import { Service } from '@prisma/client';
 
 export interface Create {
-    name: string;
-    value: number;
-    description?: string;
+  name: string;
+  value: number;
+  description?: string;
 }
 
 export interface FindByName {
-    name: string;
+  name: string;
 }
 
 export interface FindById {
-    id: string;
+  id: string;
 }
 
-export abstract class ServiceRepository{
-    abstract create({name, value, description}:Create):Promise<Service>;
-    abstract findByName({name}:FindByName):Promise<Service | null>;
-    abstract findById({id}:FindById):Promise<Service | null>;
-    abstract findAll():Promise<Service[]>;
+export abstract class ServiceRepository {
+  abstract create({ name, value, description }: Create): Promise<Service>;
+  abstract findByName({ name }: FindByName): Promise<Service | null>;
+  abstract findById({ id }: FindById): Promise<Service | null>;
+  abstract findAll(): Promise<Service[]>;
 }
