@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post, StreamableFile, UseGuards } from "@nestjs/common";
 import { OrderService, OrderServiceStatus, Role } from "@prisma/client";
 import { Roles } from "src/decorators/Roles.decorator";
 import { OrderServices } from "src/domain/OrderServiceRepository";
@@ -7,6 +7,7 @@ import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateOrderServiceDTO } from "src/shared/dtos/order_service/CreateOrderServiceDTO";
 import { CreateOrderServiceUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
 import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
+import { GeneratePdfOrderServiceUseCase } from "src/usecase/order_service/GeneratePdfOrderServiceUseCase";
 import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
 import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/UpdateStatusOrderServiceUseCase";
 
@@ -16,7 +17,8 @@ export class OrderServiceController{
         private readonly createOrderServiceUseCase: CreateOrderServiceUseCase,
         private readonly listOrderServiceUseCase: ListOrderServiceUseCase,
         private readonly findOrderServiceUseCase: FindOrderServiceUseCase,
-        private readonly updateStatusOrderServiceUseCase: UpdateStatusOrderServiceUseCase
+        private readonly updateStatusOrderServiceUseCase: UpdateStatusOrderServiceUseCase,
+        private readonly generatePdfOrderServiceUseCase: GeneratePdfOrderServiceUseCase
     ){}
 
 
@@ -48,5 +50,11 @@ export class OrderServiceController{
         @Body('status') status: OrderServiceStatus
     ):Promise<OrderService>{
         return this.updateStatusOrderServiceUseCase.execute({id, status});
+    }
+
+    @Get(':id/pdf')
+    @UseGuards(JwtAuthGuard)
+    generatePdf(@Param('id') id: string): Promise<StreamableFile> {
+        return this.generatePdfOrderServiceUseCase.execute({ id });
     }
 }
