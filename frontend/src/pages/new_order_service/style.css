@@ -1,0 +1,39 @@
+@import "../../styles/variables.css";
+
+.content-steppers {
+  flex: 1;
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    380px;
+
+  gap: var(--spacing-xl);
+  padding: var(--spacing-lg);
+
+  min-height: 0;
+  overflow: hidden;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.resume-content {
+  width: 380px;
+}
+
+.step-list-titles {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  color: var(--color-text-dark-blue);
+
+  padding: 5px;
+  margin: 10px;
+}

@@ -1,0 +1,82 @@
+@import "../../styles/variables.css";
+
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  min-height: 80px;
+
+  padding: 16px;
+
+  border-radius: 5px;
+  border: 1px solid var(--color-border-light);
+  background-color: var(--color-select-card-bg);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.service-card:hover {
+  border-color: var(--color-border-card-hover);
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.service-card_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  align-items: start;
+}
+
+.service-card_title {
+  font-size: var(--title-section);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-dark-blue);
+}
+
+.service-card_description {
+  font-size: var(--body-secondary);
+  color: var(--color-text-secondary);
+}
+
+.service-card_value {
+  font-family: "Inter", sans-serif;
+  font-weight: var(--font-bold);
+  white-space: nowrap;
+}
+
+.service-card.selected {
+  border-color: var(--color-primary);
+  border-left: 5px solid var(--color-primary);
+
+  background-color: #fffdf5;
+
+  box-shadow: var(--shadow-selected-card);
+}
+
+.service-card.selected:hover {
+  box-shadow: var(--shadow-selected-card-hover);
+  transform: translateY(-1px);
+}
+
+.service-card.selected .service-card_value {
+  color: var(--color-primary-dark);
+}
+
+.service-card_checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.service-card_checkbox.selected {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-primary);
+}

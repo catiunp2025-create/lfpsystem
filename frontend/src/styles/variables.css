@@ -3,6 +3,63 @@
   --sidebar-closed: 75px;
   --sidebar-open: 260px;
   --transition-default: 0.3s ease;
-  --color-topbar: #0c1222;
+
+  --color-topbar-bg: #0c1222;
+  --color-card-bg: #0f172a;
   --color-content-bg: transparent;
+  --color-select-card-bg: #f4f4f4;
+  --color-bg-dark: #08142b;
+  --color-bg-light: #dbeafc;
+  --color-bg-disable: #E2E8F0;
+  --color-stepbar-bg: #f4f4f4;
+  --color-cards-icon-bg: #F1F5F9;
+
+  --color-primary: #fbbf24;
+  --color-primary-dark: #D97706;
+  --color-primary-hover: #d89d00;
+  --color-focus-visible: #f4b400;
+
+  --color-text-primary: #fff;
+  --color-text-secondary: #9aa6c1;
+  --color-text-muted: #7f8ba3;
+  --color-text-dark-blue: #1e293b;
+
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-border-light: #d1d5db;
+  --color-border-card-hover: #94a3b8;
+
+  /* TIPOGRAFIA */
+  --label-small: 0.65rem;
+  --body-secondary: 0.75rem;
+  --body-primary: 0.8rem;
+  --title-section: 1.1rem;
+  --body-total: 1.5rem;
+  --title-main: 2rem;
+
+  /* FONT WEIGHT */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* ESPAÇAMENTO */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* BORDER RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-text-title: 0 0 3px rgba(255, 255, 255, 0.5);
+  --shadow-text-sub: 0 0 3px rgba(255, 255, 255, 0.4);
+  --shadow-text-h2:
+    0 0 6px rgba(250, 204, 21, 0.5), 0 0 10px rgba(255, 255, 255, 0.25);
+  --shadow-selected-card: 0 0 0 2px rgba(244, 180, 0, 0.15);
+  --shadow-selected-card-hover: 0 0 0 2px rgba(244, 180, 0, 0.35);
 }

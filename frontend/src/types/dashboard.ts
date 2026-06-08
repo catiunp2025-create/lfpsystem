@@ -7,6 +7,7 @@ export type AllOrderService = {
   services: Service[];
 };
 
+// TODO: Remover
 export type Service = {
   id: string;
   name: string;

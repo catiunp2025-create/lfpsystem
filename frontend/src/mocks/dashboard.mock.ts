@@ -6,6 +6,42 @@ export const mockServiceOrders: AllOrderService[] = [
     vehicleUserId: "user-101",
     addressId: "addr-201",
     status: "COMPLETED",
+    date: new Date("2026-06-02T09:15:00"),
+    services: [
+      {
+        id: "srv-001",
+        name: "Dedetizacao Residencial",
+        value: 250,
+        description: "Controle de pragas em ambiente residencial",
+      },
+      {
+        id: "srv-002",
+        name: "Controle de Mosquitos",
+        value: 180,
+        description: "Aplicação para redução de mosquitos",
+      },
+    ],
+  },
+  {
+    id: "os-001",
+    vehicleUserId: "user-101",
+    addressId: "addr-201",
+    status: "COMPLETED",
+    date: new Date("2026-06-01T09:15:00"),
+    services: [
+      {
+        id: "srv-001",
+        name: "Dedetizacao Residencial",
+        value: 250,
+        description: "Controle de pragas em ambiente residencial",
+      },
+    ],
+  },
+  {
+    id: "os-001",
+    vehicleUserId: "user-101",
+    addressId: "addr-201",
+    status: "COMPLETED",
     date: new Date("2026-05-12T09:15:00"),
     services: [
       {

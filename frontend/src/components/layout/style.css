@@ -1,15 +1,16 @@
 @import "../../styles/variables.css";
 
 .dashboard-shell {
-  height: 100%;
+  display: flex;
+  height: 100vh;
   overflow: hidden;
 }
 
 .main-layout {
+  flex: 1;
   display: flex;
   width: 100%;
-  height: calc(100vh - var(--topbar-height));
-  margin-top: var(--topbar-height);
+  min-height: 0;
 }
 
 .main-layout .sidebar {
@@ -18,7 +19,7 @@
   left: 0;
 
   width: var(--sidebar-closed);
-  height: calc(100vh - var(--topbar-height));
+  min-height: 0;
 
   transition: width var(--transition-default);
 
@@ -31,7 +32,10 @@
 
 .content {
   flex: 1;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding-top: var(--topbar-height);
   margin-left: var(--sidebar-closed);
   transition: margin-left 0.3s ease;
 }

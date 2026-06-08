@@ -9,7 +9,7 @@ function Login() {
   const inputPass = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  async function userLogin(event: React.FormEvent<HTMLFormElement>) {
+  async function userLogin(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
