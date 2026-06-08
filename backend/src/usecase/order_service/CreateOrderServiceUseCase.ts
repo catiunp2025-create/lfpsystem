@@ -13,7 +13,7 @@ interface Request{
 }
 
 @Injectable()
-export class CreateOrderSericeUseCase{
+export class CreateOrderServiceUseCase{
     constructor(
         private readonly orderServiceRepository: OrderServiceRepository,
         private readonly serviceOrderServiceRepository: ServiceOrderServiceRepository

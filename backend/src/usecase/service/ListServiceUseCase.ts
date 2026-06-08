@@ -4,9 +4,9 @@ import { ServiceRepository } from "src/domain/ServiceRepository";
 
 @Injectable()
 export class ListServiceUseCase{
-    constructor(private readonly servicerepository: ServiceRepository){}
+    constructor(private readonly serviceRepository: ServiceRepository){}
 
     async execute():Promise<Service[]>{
-        return this.servicerepository.findAll()
+        return this.serviceRepository.findAll()
     }
 }

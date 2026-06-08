@@ -5,7 +5,7 @@ import { OrderServices } from "src/domain/OrderServiceRepository";
 import { JwtAuthGuard } from "src/guards/JwtAuthGuard";
 import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateOrderServiceDTO } from "src/shared/dtos/order_service/CreateOrderServiceDTO";
-import { CreateOrderSericeUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
+import { CreateOrderServiceUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
 import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
 import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
 import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/UpdateStatusOrderServiceUseCase";
@@ -13,7 +13,7 @@ import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/Updat
 @Controller('/order-services')
 export class OrderServiceController{
     constructor(
-        private readonly createOrderServiceUseCase: CreateOrderSericeUseCase,
+        private readonly createOrderServiceUseCase: CreateOrderServiceUseCase,
         private readonly listOrderServiceUseCase: ListOrderServiceUseCase,
         private readonly findOrderServiceUseCase: FindOrderServiceUseCase,
         private readonly updateStatusOrderServiceUseCase: UpdateStatusOrderServiceUseCase

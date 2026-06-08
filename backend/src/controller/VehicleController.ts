@@ -5,7 +5,7 @@ import { JwtAuthGuard } from "src/guards/JwtAuthGuard";
 import { RolesGuard } from "src/guards/RolesGuard";
 import { CreateVehicleDTO } from "src/shared/dtos/vehicle/CreateVehicleDTO";
 import { CreateVehicleUseCase } from "src/usecase/vehicle/CreateVehicleUseCase";
-import { FindVehicleUseCase } from "src/usecase/vehicle/FindVehicleUserCase";
+import { FindVehicleUseCase } from "src/usecase/vehicle/FindVehicleUseCase";
 import { ListVehicleUseCase } from "src/usecase/vehicle/ListVehicleUseCase";
 
 @Controller('/vehicles')
