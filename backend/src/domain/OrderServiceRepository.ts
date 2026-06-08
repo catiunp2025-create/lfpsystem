@@ -1,7 +1,6 @@
 import { OrderService, OrderServiceStatus, Prisma } from "@prisma/client";
 
 export interface CreateOrderService{
-    vehicleUserId: string;
     date: Date;
     addressId: string;
     status: OrderServiceStatus
@@ -9,10 +8,14 @@ export interface CreateOrderService{
 
 export type OrderServices = Prisma.OrderServiceGetPayload<{
     include:{
-        vehicleUser:{
+        vehicleUsers:{
             include:{
-                vehicle: true,
-                user: true
+                vehicleUser:{
+                    include:{
+                        vehicle: true,
+                        user: true
+                    }
+                }
             }
         },
         address:{
@@ -42,7 +45,7 @@ export interface UpdateStatus{
 }
 
 export abstract class OrderServiceRepository{
-    abstract create({vehicleUserId, date, addressId, status}: CreateOrderService):Promise<OrderService>
+    abstract create({date, addressId, status}: CreateOrderService):Promise<OrderService>
     abstract findAll():Promise<OrderServices[]>
     abstract findById({id}: FindById):Promise<OrderServices | null>
     abstract updateStatus({id, status}: UpdateStatus):Promise<OrderService>

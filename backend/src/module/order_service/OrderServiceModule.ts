@@ -4,8 +4,10 @@ import { PassportModule } from "@nestjs/passport";
 import { OrderServiceController } from "src/controller/OrderServiceController";
 import { OrderServiceRepository } from "src/domain/OrderServiceRepository";
 import { ServiceOrderServiceRepository } from "src/domain/ServiceOrderServiceRepository";
+import { VehicleUserOrderServiceRepository } from "src/domain/VehicleUserOrderServiceRepository";
 import { PrismaOrderServiceRepository } from "src/external/repositories/remote/PrismaOrderServiceRepository";
 import { PrismaServiceOrderServiceRepository } from "src/external/repositories/remote/PrismaServiceOrderServiceRepository";
+import { PrismaVehicleUserOrderServiceRepository } from "src/external/repositories/remote/PrismaVehicleUserOrderServiceRepository";
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateOrderServiceUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
 import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
@@ -34,8 +36,12 @@ import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/Updat
             useClass: PrismaOrderServiceRepository,
         },
         {
-                provide: ServiceOrderServiceRepository,
-                useClass: PrismaServiceOrderServiceRepository,
+            provide: ServiceOrderServiceRepository,
+            useClass: PrismaServiceOrderServiceRepository,
+        },
+        {
+            provide: VehicleUserOrderServiceRepository,
+            useClass: PrismaVehicleUserOrderServiceRepository,
         }
     ],
 })
