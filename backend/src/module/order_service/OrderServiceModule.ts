@@ -9,6 +9,7 @@ import { PrismaServiceOrderServiceRepository } from "src/external/repositories/r
 import { JwtStrategy } from "src/strategies/JwtStrategy";
 import { CreateOrderServiceUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
 import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
+import { GeneratePdfOrderServiceUseCase } from "src/usecase/order_service/GeneratePdfOrderServiceUseCase";
 import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
 import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/UpdateStatusOrderServiceUseCase";
 
@@ -26,6 +27,7 @@ import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/Updat
         ListOrderServiceUseCase,
         FindOrderServiceUseCase,
         UpdateStatusOrderServiceUseCase,
+        GeneratePdfOrderServiceUseCase,
         JwtStrategy,
         {
             provide: OrderServiceRepository,
