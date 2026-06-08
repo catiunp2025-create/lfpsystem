@@ -118,7 +118,7 @@ model VehicleUser {
   vehicle Vehicle @relation(fields: [vehicleId], references: [id])
   user User @relation(fields: [userId], references: [id])
   records VehicleUserRecord[]
-  orderServices OrderService[]
+  orderServices VehicleUserOrderService[]
 
   @@unique([vehicleId, userId])
   @@map("vehicle_user")
@@ -179,20 +179,29 @@ model Service {
 
 model OrderService{
   id              String @id @default(uuid()) @db.Uuid
-  vehicleUserId   String @map("vehicle_user_id") @db.Uuid
   date            DateTime
   addressId       String @map("address_id") @db.Uuid
   status          OrderServiceStatus
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @default(now()) @updatedAt @map("updated_at")
 
-  vehicleUser   VehicleUser @relation(fields: [vehicleUserId], references: [id])
-  address       Address @relation(fields: [addressId], references: [id])
-  services ServiceOrderService[]
-
-
+  address         Address @relation(fields: [addressId], references: [id])
+  services        ServiceOrderService[]
+  vehicleUsers    VehicleUserOrderService[]
 
   @@map("order_service")
+}
+
+model VehicleUserOrderService {
+  id              String @id @default(uuid()) @db.Uuid
+  vehicleUserId   String @map("vehicle_user_id") @db.Uuid
+  orderServiceId  String @map("order_service_id") @db.Uuid
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  vehicleUser   VehicleUser @relation(fields: [vehicleUserId], references: [id])
+  orderService  OrderService @relation(fields: [orderServiceId], references: [id], onDelete: Cascade)
+
+  @@map("vehicle_user_order_service")
 }
 
 model ServiceOrderService {

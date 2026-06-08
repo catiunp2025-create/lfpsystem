@@ -7,19 +7,23 @@ import { CreateOrderService, FindById, OrderServiceRepository, OrderServices, Up
 export class PrismaOrderServiceRepository implements OrderServiceRepository{
     constructor(private readonly repository: PrismaRemoteRepository){}
 
-    create({vehicleUserId, date, addressId, status}:CreateOrderService):Promise<OrderService>{
+    create({date, addressId, status}:CreateOrderService):Promise<OrderService>{
         return this.repository.orderService.create({
-            data:{vehicleUserId, date, addressId, status}
+            data:{date, addressId, status}
         })
     }
 
     findAll(): Promise<OrderServices[]> {
         return this.repository.orderService.findMany({
             include:{
-                vehicleUser:{
+                vehicleUsers:{
                     include:{
-                        vehicle:true,
-                        user: true
+                        vehicleUser:{
+                            include:{
+                                vehicle:true,
+                                user: true
+                            }
+                        }
                     }
                 },
                 address:{
@@ -44,10 +48,14 @@ export class PrismaOrderServiceRepository implements OrderServiceRepository{
         return this.repository.orderService.findFirst({
             where:{id},
             include:{
-                vehicleUser:{
+                vehicleUsers:{
                     include:{
-                        vehicle:true,
-                        user: true
+                        vehicleUser:{
+                            include:{
+                                vehicle:true,
+                                user: true
+                            }
+                        }
                     }
                 },
                 address:{

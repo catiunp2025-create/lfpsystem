@@ -1,9 +1,10 @@
 import { IsArray, IsDate, IsNotEmpty, IsUUID } from "class-validator";
 
 export class CreateOrderServiceDTO{
-    @IsUUID()
     @IsNotEmpty()
-    vehicleUserId!: string;
+    @IsArray()
+    @IsUUID('4', { each: true })
+    vehicleUserIds!: string[];
 
     @IsNotEmpty()
     @IsDate()

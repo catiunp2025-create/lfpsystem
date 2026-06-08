@@ -47,10 +47,14 @@ export class GeneratePdfOrderServiceUseCase {
             doc.text(`CEP: ${address.postCode}`);
             doc.moveDown();
 
-            const vu = orderService.vehicleUser;
             doc.fontSize(13).text("Equipe", { underline: true });
-            doc.fontSize(11).text(`Funcionário: ${vu.user.name} (${vu.type})`);
-            doc.text(`Veículo: ${vu.vehicle.model} - ${vu.vehicle.plate}`);
+            orderService.vehicleUsers.forEach(({ vehicleUser: vu }) => {
+                doc.fontSize(11).text(`Funcionário: ${vu.user.name} (${vu.type})`);
+            });
+            const firstVu = orderService.vehicleUsers[0]?.vehicleUser;
+            if (firstVu) {
+                doc.fontSize(11).text(`Veículo: ${firstVu.vehicle.model} - ${firstVu.vehicle.plate}`);
+            }
             doc.moveDown();
 
             doc.fontSize(13).text("Serviços", { underline: true });

@@ -25,8 +25,8 @@ export class OrderServiceController{
     @Post()
     @UseGuards(JwtAuthGuard, RolesGuard)
     @Roles(Role.MANAGER)
-    create(@Body(){vehicleUserId, date, addressId, serviceIds}: CreateOrderServiceDTO):Promise<OrderService>{
-        return this.createOrderServiceUseCase.execute({vehicleUserId, date, addressId,serviceIds});
+    create(@Body(){vehicleUserIds, date, addressId, serviceIds}: CreateOrderServiceDTO):Promise<OrderService>{
+        return this.createOrderServiceUseCase.execute({vehicleUserIds, date, addressId, serviceIds});
     }
 
     @Get()
