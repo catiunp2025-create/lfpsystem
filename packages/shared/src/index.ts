@@ -2,7 +2,7 @@ export type Role = "MANAGER" | "EMPLOYEE";
 export type VehicleUserType = "DRIVER" | "ASSISTANT";
 export type IdentificationType = "CNPJ" | "CPF";
 export type ContactType = "PHONE" | "EMAIL";
-export type OrderServiceStatus = "AVAILABLE" | "WAITING_ASSIGN" | "FINISHED";
+export type OrderServiceStatus = "AVAILABLE" | "FINISHED";
 
 export type Users = {
   id: string;
@@ -70,31 +70,31 @@ export type Service = {
   description?: string;
 };
 
-export type OrderService = {
-  id: string;
-  vehicleUserId: string;
-  date: Date;
-  status: OrderServiceStatus;
-  addressId: string;
-  serviceIds: string[];
-};
-
 export type OrderServices = {
   id: string;
   date: string;
   status: OrderServiceStatus;
-  vehicleUser: {
-    id: string;
-    type: VehicleUserType;
-    vehicle: Vehicle;
-    user: {
+  vehicleUsers: {
+    vehicleUser: {
       id: string;
-      name: string;
-      role: Role;
+      type: VehicleUserType;
+      vehicle: Vehicle;
+      user: {
+        id: string;
+        name: string;
+        role: Role;
+      };
     };
-  };
+  }[];
   address: {
-    address: Address;
+    id: string;
+    street: string;
+    number: string;
+    complement: string | null;
+    neighborhood: string;
+    postCode: string;
+    city: string;
+    state: string;
     customer: {
       id: string;
       name: string;
