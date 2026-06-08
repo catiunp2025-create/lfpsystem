@@ -26,8 +26,7 @@ export class GeneratePdfOrderServiceUseCase {
             doc.fontSize(18).text("Ordem de Serviço", { align: "center" });
             doc.moveDown();
 
-            doc.fontSize(11).text(`ID: ${orderService.id}`);
-            doc.text(`Data: ${new Date(orderService.date).toLocaleDateString("pt-BR")}`);
+            doc.fontSize(11).text(`Data: ${new Date(orderService.date).toLocaleDateString("pt-BR")}`);
             doc.text(`Status: ${orderService.status}`);
             doc.moveDown();
 
