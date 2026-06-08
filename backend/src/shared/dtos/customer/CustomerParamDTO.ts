@@ -1,7 +1,6 @@
-import { IsNotEmpty, IsString, IsUUID } from "class-validator";
+import { IsUUID } from 'class-validator';
 
-export class CustomerParamDTO{
-    
-    @IsUUID()
-    customerId!: string;
+export class CustomerParamDTO {
+  @IsUUID()
+  customerId!: string;
 }

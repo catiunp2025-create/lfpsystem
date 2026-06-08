@@ -1,49 +1,48 @@
-import { Module } from "@nestjs/common";
-import { JwtModule } from "@nestjs/jwt";
-import { PassportModule } from "@nestjs/passport";
-import { OrderServiceController } from "src/controller/OrderServiceController";
-import { OrderServiceRepository } from "src/domain/OrderServiceRepository";
-import { ServiceOrderServiceRepository } from "src/domain/ServiceOrderServiceRepository";
-import { VehicleUserOrderServiceRepository } from "src/domain/VehicleUserOrderServiceRepository";
-import { PrismaOrderServiceRepository } from "src/external/repositories/remote/PrismaOrderServiceRepository";
-import { PrismaServiceOrderServiceRepository } from "src/external/repositories/remote/PrismaServiceOrderServiceRepository";
-import { PrismaVehicleUserOrderServiceRepository } from "src/external/repositories/remote/PrismaVehicleUserOrderServiceRepository";
-import { JwtStrategy } from "src/strategies/JwtStrategy";
-import { CreateOrderServiceUseCase } from "src/usecase/order_service/CreateOrderServiceUseCase";
-import { FindOrderServiceUseCase } from "src/usecase/order_service/FindOrderServiceUseCase";
-import { GeneratePdfOrderServiceUseCase } from "src/usecase/order_service/GeneratePdfOrderServiceUseCase";
-import { ListOrderServiceUseCase } from "src/usecase/order_service/ListOrderServiceUseCase";
-import { UpdateStatusOrderServiceUseCase } from "src/usecase/order_service/UpdateStatusOrderServiceUseCase";
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { OrderServiceController } from 'src/controller/OrderServiceController';
+import { OrderServiceRepository } from 'src/domain/OrderServiceRepository';
+import { ServiceOrderServiceRepository } from 'src/domain/ServiceOrderServiceRepository';
+import { VehicleUserOrderServiceRepository } from 'src/domain/VehicleUserOrderServiceRepository';
+import { PrismaOrderServiceRepository } from 'src/external/repositories/remote/PrismaOrderServiceRepository';
+import { PrismaServiceOrderServiceRepository } from 'src/external/repositories/remote/PrismaServiceOrderServiceRepository';
+import { PrismaVehicleUserOrderServiceRepository } from 'src/external/repositories/remote/PrismaVehicleUserOrderServiceRepository';
+import { JwtStrategy } from 'src/strategies/JwtStrategy';
+import { CreateOrderServiceUseCase } from 'src/usecase/order_service/CreateOrderServiceUseCase';
+import { FindOrderServiceUseCase } from 'src/usecase/order_service/FindOrderServiceUseCase';
+import { GeneratePdfOrderServiceUseCase } from 'src/usecase/order_service/GeneratePdfOrderServiceUseCase';
+import { ListOrderServiceUseCase } from 'src/usecase/order_service/ListOrderServiceUseCase';
+import { UpdateStatusOrderServiceUseCase } from 'src/usecase/order_service/UpdateStatusOrderServiceUseCase';
 
 @Module({
-    imports: [
-        PassportModule,
-        JwtModule.register({
-            secret: process.env.JWT_SECRET,
-            signOptions: { expiresIn: '1d' },
-        }),
-    ],
-    controllers: [OrderServiceController],
-    providers: [
-        CreateOrderServiceUseCase,
-        ListOrderServiceUseCase,
-        FindOrderServiceUseCase,
-        UpdateStatusOrderServiceUseCase,
-        GeneratePdfOrderServiceUseCase,
-        JwtStrategy,
-        {
-            provide: OrderServiceRepository,
-            useClass: PrismaOrderServiceRepository,
-        },
-        {
-            provide: ServiceOrderServiceRepository,
-            useClass: PrismaServiceOrderServiceRepository,
-        },
-        {
-            provide: VehicleUserOrderServiceRepository,
-            useClass: PrismaVehicleUserOrderServiceRepository,
-        }
-    ],
+  imports: [
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
+    }),
+  ],
+  controllers: [OrderServiceController],
+  providers: [
+    CreateOrderServiceUseCase,
+    ListOrderServiceUseCase,
+    FindOrderServiceUseCase,
+    UpdateStatusOrderServiceUseCase,
+    GeneratePdfOrderServiceUseCase,
+    JwtStrategy,
+    {
+      provide: OrderServiceRepository,
+      useClass: PrismaOrderServiceRepository,
+    },
+    {
+      provide: ServiceOrderServiceRepository,
+      useClass: PrismaServiceOrderServiceRepository,
+    },
+    {
+      provide: VehicleUserOrderServiceRepository,
+      useClass: PrismaVehicleUserOrderServiceRepository,
+    },
+  ],
 })
-
-export class OrderServiceModule{}
+export class OrderServiceModule {}

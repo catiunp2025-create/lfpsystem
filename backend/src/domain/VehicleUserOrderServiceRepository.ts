@@ -1,10 +1,13 @@
-import { VehicleUserOrderService } from "@prisma/client";
+import { VehicleUserOrderService } from '@prisma/client';
 
 export interface Create {
-    vehicleUserId: string;
-    orderServiceId: string;
+  vehicleUserId: string;
+  orderServiceId: string;
 }
 
 export abstract class VehicleUserOrderServiceRepository {
-    abstract create({ vehicleUserId, orderServiceId }: Create): Promise<VehicleUserOrderService>;
+  abstract create({
+    vehicleUserId,
+    orderServiceId,
+  }: Create): Promise<VehicleUserOrderService>;
 }

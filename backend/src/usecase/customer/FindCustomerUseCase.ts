@@ -1,22 +1,22 @@
-import { Injectable } from "@nestjs/common";
-import { CustomerRepository } from "src/domain/CustomerRepository";
-import { CustomerNotFound } from "src/shared/erros/cases/CustomerNotFound";
+import { Injectable } from '@nestjs/common';
+import { CustomerRepository } from 'src/domain/CustomerRepository';
+import { CustomerNotFound } from 'src/shared/erros/cases/CustomerNotFound';
 
 interface Request {
-    id: string;
+  id: string;
 }
 
 @Injectable()
 export class FindCustomerUseCase {
-    constructor(private readonly customerRepository: CustomerRepository){}
+  constructor(private readonly customerRepository: CustomerRepository) {}
 
-    async execute({id}: Request){
-        const customer = await this.customerRepository.findById({id});
+  async execute({ id }: Request) {
+    const customer = await this.customerRepository.findById({ id });
 
-        if(!customer){
-            throw new CustomerNotFound();
-        }
-
-        return customer;
+    if (!customer) {
+      throw new CustomerNotFound();
     }
+
+    return customer;
+  }
 }
