@@ -12,7 +12,7 @@ type SteppersProps = {
 
 export function Steppers({
   currentStep = 1,
-  visitedSteps = 1,
+  visitedSteps = new Set<StepNumber>(),
   completedSteps,
   onStepChange,
 }: SteppersProps) {
