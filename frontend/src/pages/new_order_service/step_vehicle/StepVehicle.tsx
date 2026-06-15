@@ -14,10 +14,6 @@ import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import { useEffect, useState } from "react";
 import api from "../../../services/api";
 import ActionButton from "../../../components/action_button/ActionButton";
-import {
-  mockVehicles,
-  mockVehicleUsers,
-} from "../../../mocks/stepvehicle.mock";
 
 type StepVehicleProps = BaseStepProps & {
   handleSelectVehicleStep: (vehicle: Vehicle) => void;
@@ -54,8 +50,8 @@ function StepVehicle({
     setErrorVehicles(null);
 
     try {
-      // const response = await api.get("/vehicles");
-      setVehicles(mockVehicles); // response.data | mockVehicles
+      const response = await api.get("/vehicles");
+      setVehicles(response.data);
     } catch (errorVehicles) {
       setErrorVehicles("Não foi possível listar veículos");
     } finally {
@@ -68,8 +64,8 @@ function StepVehicle({
     setErrorEmployees(null);
 
     try {
-      // const response = await api.get("/vehicle-users");
-      setEmployees(mockVehicleUsers); // response.data | mockVehicleUsers
+      const response = await api.get("/vehicle-users");
+      setEmployees(response.data);
     } catch (error) {
       setErrorEmployees("Não foi possível listar funcionários");
     } finally {

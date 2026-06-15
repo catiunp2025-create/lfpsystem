@@ -1,4 +1,6 @@
 import "./style.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -10,12 +12,38 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import femaleIcon from "../../assets/female-icon.png";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
+import api from "../../services/api";
+import type { Role } from "../../../../packages/shared/src";
 
-type SidbebarProps = {
+type SidebarProps = {
   open: boolean;
 };
 
-function Sidebar({ open }: SidbebarProps) {
+type CurrentUser = {
+  id: string;
+  email: string;
+  name: string;
+  role: Role;
+};
+
+const roleLabel: Record<Role, string> = {
+  MANAGER: "Gerente",
+  EMPLOYEE: "Funcionário",
+};
+
+function Sidebar({ open }: SidebarProps) {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<CurrentUser | null>(null);
+
+  useEffect(() => {
+    api.get<CurrentUser>("/auth/me").then((res) => setUser(res.data));
+  }, []);
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
   return (
     <aside className={`sidebar ${open ? "open" : "closed"}`}>
       <div className="sidebar-inner">
@@ -25,15 +53,15 @@ function Sidebar({ open }: SidbebarProps) {
             <div className="menu-separator"></div>
           </h4>
           <li>
-            <a href="http://localhost:5173/home">
+            <Link to="/home">
               <SpaceDashboardOutlinedIcon /> Dashboard
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="http://localhost:5173/new-order">
+            <Link to="/new-order">
               <ReceiptLongOutlinedIcon />
               Nova Ordem de Serviço
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#">
@@ -82,20 +110,18 @@ function Sidebar({ open }: SidbebarProps) {
             </a>
           </li>
           <li>
-            <a href="#">
+            <button onClick={handleLogout}>
               <LogoutOutlinedIcon />
               Sair
-            </a>
+            </button>
           </li>
         </ul>
         <div className="user-account">
           <div className="user-profile">
             <img src={femaleIcon} alt="User profile picture" />
             <div className="user-detail">
-              {/* pegar nome de user */}
-              <h3>Eva Murphy</h3>
-              {/* pegar cargo de user */}
-              <span>Gerente</span>
+              <h3>{user?.name ?? "..."}</h3>
+              <span>{user ? roleLabel[user.role] : "..."}</span>
             </div>
           </div>
         </div>
