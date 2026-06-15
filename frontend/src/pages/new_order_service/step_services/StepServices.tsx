@@ -5,7 +5,6 @@ import type { Service } from "../../../../../packages/shared/src";
 import ActionButton from "../../../components/action_button/ActionButton";
 import ServiceCard from "../../../components/service_card/ServiceCard";
 import { useEffect, useState } from "react";
-import { mockServices } from "../../../mocks/entities";
 import api from "../../../services/api";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
@@ -26,13 +25,13 @@ function StepServices({
   const [serviceLoading, setServiceLoading] = useState(false);
   const [serviceError, setServiceError] = useState<string | null>(null);
 
-  function fetchServiceList() {
+  async function fetchServiceList() {
     setServiceLoading(true);
     setServiceError(null);
 
     try {
-      // const response = await api.get("/services");
-      setServices(mockServices); // response.data | mockServices
+      const response = await api.get("/services");
+      setServices(response.data);
     } catch (error) {
       setServiceError("Não foi possível listar os servicos");
     } finally {

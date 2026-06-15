@@ -16,7 +16,6 @@ import type {
   ChartData,
   Service,
 } from "../../types/dashboard";
-import { mockServiceOrders } from "../../mocks/dashboard.mock";
 import MainLayout from "../../components/layout/MainLayout";
 import { formatCurrency } from "../../utils/FormatCurrency";
 
@@ -30,7 +29,7 @@ function formatApiData(allOrderService: AllOrderService[]): ApiData[] {
     const key = `${year}-${month}`;
 
     const osTotal = os.services.reduce(
-      (sum, service) => sum + service.value,
+      (sum, { service }) => sum + service.value,
       0,
     );
 
@@ -57,7 +56,7 @@ function mostRequestedService(
   allOrderService: AllOrderService[],
 ): [string, Service[]] | null {
   const services = allOrderService.reduce<Service[]>((acc, os) => {
-    return [...acc, ...os.services];
+    return [...acc, ...os.services.map((item) => item.service)];
   }, []);
 
   const servicePerName = services.reduce<Record<string, Service[]>>(
@@ -79,8 +78,8 @@ function mostRequestedService(
 
   return entries.length > 0
     ? entries.reduce((max, current) =>
-        current[1].length > max[1].length ? current : max,
-      )
+      current[1].length > max[1].length ? current : max,
+    )
     : null;
 }
 
@@ -144,10 +143,10 @@ function Home() {
     mostRequestedService(currentYearOrders) ?? ["Sem dados", []];
   const orderServicePerYear = currentYearOrders.length;
   const orderServiceCompleted = currentYearOrders.filter(
-    (os) => os.status === "COMPLETED",
+    (os) => os.status === "FINISHED",
   ).length;
   const orderServicePending = currentYearOrders.filter(
-    (os) => os.status === "PENDING",
+    (os) => os.status === "AVAILABLE",
   ).length;
 
   const currentCardData = apiData.find(
@@ -162,11 +161,15 @@ function Home() {
     setError(null);
 
     try {
-      // const response = await api.get("/order-services");
-      const data: AllOrderService[] = mockServiceOrders; // response.data | mockServiceOrders
+      const response = await api.get("/order-services");
+      const data: AllOrderService[] = response.data.map((os: AllOrderService & { date: string }) => ({
+        ...os,
+        date: new Date(os.date),
+      }));
       setServiceOrders(
         data.filter((os) => os.date > startDate && os.date < endDate),
       );
+
     } catch (error) {
       setError("Não foi possível carregar os dados.");
     } finally {
@@ -196,7 +199,7 @@ function Home() {
                   <p className="card-sub">
                     {Math.round(
                       (currentCardData?.total * 100) / previousCardData?.total -
-                        100,
+                      100,
                     )}
                     % vs mês anterior
                   </p>

@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import StepToolbar from "../step_toolbar/StepToolbar";
 import api from "../../../services/api";
 import SearchBar from "../../../components/search_bar/SearchBar";
-import { mockCustomers } from "../../../mocks/entities";
 import SelectableCard from "../../../components/selectable_card/SelectableCard";
 
 type StepCustomerProps = BaseStepProps & {
@@ -39,12 +38,9 @@ function StepCustomer({
     setCustomerError(null);
 
     try {
-      setCustomerLoading(true);
-      setCustomerError(null);
-
-      // const response = await api.get("/customers");
-
-      setCustomers(mockCustomers); // response.data | mockCustomers
+      const response = await api.get("/customers");
+      setCustomers(response.data);
+      
     } catch (error) {
       setCustomerError("Não foi possível listar clientes");
     } finally {

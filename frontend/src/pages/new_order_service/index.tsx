@@ -312,8 +312,18 @@ function NewOrderService() {
           <ResumeOs currentStepData={currentStepData} />
         </div>
       </div>
+
+      {CurrentModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <CurrentModalOpen {...baseProps} />
+          </div>
+        </div>
+      )}
+
     </MainLayout>
   );
+
 }
 
 export default NewOrderService;

@@ -1,18 +1,17 @@
-export type AllOrderService = {
-  id: string;
-  vehicleUserId: string;
-  date: Date;
-  addressId: string;
-  status: string;
-  services: Service[];
-};
+import type { OrderServiceStatus } from "../../../packages/shared/src";
 
-// TODO: Remover
 export type Service = {
   id: string;
   name: string;
   value: number;
   description: string;
+};
+
+export type AllOrderService = {
+  id: string;
+  date: Date;
+  status: OrderServiceStatus;
+  services: { service: Service}[];
 };
 
 export type ApiData = {
@@ -24,4 +23,4 @@ export type ApiData = {
 export type ChartData = {
   dateKey: string;
   total: string;
-};
+}
