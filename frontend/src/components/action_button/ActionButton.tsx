@@ -8,6 +8,8 @@ type ActionButtonProps = {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   variant: "primary" | "secondary";
+  type?: "button" | "submit";
+  form?: string;
 };
 
 function ActionButton({
@@ -17,13 +19,16 @@ function ActionButton({
   startIcon,
   endIcon,
   variant = "primary",
+  type = "button",
+  form,
 }: ActionButtonProps) {
   return (
     <button
-      type="button"
+      type={type}
       className={`action-button ${variant}`}
       disabled={disable}
       onClick={onCLick}
+      form={form}
     >
       {startIcon}
       {children}

@@ -30,7 +30,7 @@
 
 .action-button.primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  opacity: 0.95;
+  background: var(--color-primary-hover);
 }
 
 .action-button.secondary {
@@ -42,7 +42,7 @@
 }
 
 .action-button.secondary:hover:not(:disabled) {
-  background: var(--color-bg-light);
+  background: var(--color-primary);
   border-color: var(--color-border-soft);
 }
 

@@ -13,6 +13,11 @@
   --color-bg-disable: #E2E8F0;
   --color-stepbar-bg: #f4f4f4;
   --color-cards-icon-bg: #F1F5F9;
+  --color-bg-dotgrid: radial-gradient(
+    circle,
+    rgba(148, 163, 184, 0.18) 1px,
+    transparent 1px
+  );
 
   --color-primary: #fbbf24;
   --color-primary-dark: #D97706;
