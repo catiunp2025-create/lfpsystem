@@ -7,7 +7,7 @@ type VehicleFormProps = {
   handleCloseModal: () => void;
 };
 
-type Vehicleinput = {
+type VehicleInput = {
   model: string;
   color: string;
   plate: string;
@@ -19,12 +19,12 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
     handleSubmit,
     formState: { isValid },
     reset,
-  } = useForm<Vehicleinput>({
+  } = useForm<VehicleInput>({
     mode: "onChange",
     defaultValues: { model: "", color: "", plate: "" },
   });
 
-  const onSubmit = async (data: Vehicleinput) => {
+  const onSubmit = async (data: VehicleInput) => {
     try {
       await api.post("/vehicles", data);
       reset();
