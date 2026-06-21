@@ -1,0 +1,22 @@
+@import "../../styles/variables.css";
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.form-section h3 {
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: var(--font-semibold);
+}
+
+.form-section-content {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}

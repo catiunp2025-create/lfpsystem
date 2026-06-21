@@ -21,8 +21,8 @@
   transform: translate(-50%, -50%);
 
   padding: 20px;
-  height: 550px;
-  width: 500px;
+  min-height: 550px;
+  min-width: 500px;
 
   background-color: var(--color-stepbar-bg);
   background-image: var(--color-bg-dotgrid);
@@ -34,12 +34,25 @@
 .modal_container {
   flex: 1;
   display: flex;
+  flex-direction: column;
 
   align-items: center;
   justify-content: center;
 
-  flex-direction: column;
+  margin: 10px 0;
   gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  font-family: "Inter", sans-serif;
+  font-size: var(--title-section);
+  font-weight: var(--font-semibold);
 }
 
 .modal_input {
@@ -65,7 +78,7 @@
   border-radius: 8px;
   background-color: white;
 
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   outline: none;
 

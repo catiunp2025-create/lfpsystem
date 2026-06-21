@@ -2,6 +2,8 @@ import ModalCard from "../../../components/modal_card/ModalCard";
 import { useForm } from "react-hook-form";
 import api from "../../../services/api";
 import ActionButton from "../../../components/action_button/ActionButton";
+import { TextField } from "@mui/material";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 
 type VehicleFormProps = {
   handleCloseModal: () => void;
@@ -36,36 +38,33 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
   };
 
   return (
-    <ModalCard>
+    <ModalCard
+      title="Cadastrar veículo"
+      titleIcon={<LocalShippingOutlinedIcon fontSize="large" />}
+    >
       <form
         id="vehicle-form"
         className="modal_container"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="modal_input">
-          <label htmlFor="model">Modelo</label>
-          <input
-            id="model"
-            type="text"
-            {...register("model", { required: "Informe o modelo" })}
-          />
-        </div>
-        <div className="modal_input">
-          <label htmlFor="color">Cor</label>
-          <input
-            id="color"
-            type="text"
-            {...register("color", { required: "Informe a cor" })}
-          />
-        </div>
-        <div className="modal_input">
-          <label htmlFor="plate">Placa</label>
-          <input
-            id="plate"
-            type="text"
-            {...register("plate", { required: "Informe a placa" })}
-          />
-        </div>
+        <TextField
+          label="Modelo"
+          required={true}
+          {...register("model")}
+          sx={{ width: 320, background: "white" }}
+        />
+        <TextField
+          label="Placa"
+          required={true}
+          {...register("color")}
+          sx={{ width: 320, background: "white" }}
+        />
+        <TextField
+          label="Cor"
+          required={true}
+          {...register("plate")}
+          sx={{ width: 320, background: "white" }}
+        />
       </form>
       <div className="modal_footer">
         <ActionButton
