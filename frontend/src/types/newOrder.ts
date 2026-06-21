@@ -46,6 +46,7 @@ export type TypeVehicleUser =
 export const MODAL_TYPE = {
   VEHICLE: "vehicle",
   CUSTOMER: "customer",
+  SERVICE: "service",
   ORDER_REVIEW: "order_review",
 } as const;
 

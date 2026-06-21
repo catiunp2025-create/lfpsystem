@@ -1,15 +1,17 @@
 import "./style.css";
 import StepHeader from "../step_header/StepHeader";
-import { type BaseStepProps } from "../../../types/newOrder";
+import { MODAL_TYPE, type BaseStepProps } from "../../../types/newOrder";
 import type { Service } from "../../../../../packages/shared/src";
 import ActionButton from "../../../components/action_button/ActionButton";
 import ServiceCard from "../../../components/service_card/ServiceCard";
 import { useEffect, useState } from "react";
 import api from "../../../services/api";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
 
 type StepServicesProps = BaseStepProps & {
+  refresh: number;
   handleToggleService: (services: Service) => void;
 };
 
@@ -19,7 +21,9 @@ function StepServices({
   onBack,
   onNext,
   validateStep,
+  refresh,
   handleToggleService,
+  handleOpenModal,
 }: StepServicesProps) {
   const [services, setServices] = useState<Service[]>([]);
   const [serviceLoading, setServiceLoading] = useState(false);
@@ -43,13 +47,30 @@ function StepServices({
     fetchServiceList();
   }, []);
 
+  useEffect(() => {
+    fetchServiceList();
+  }, [refresh]);
+
   return (
     <div className="step-services">
       <StepHeader
         currentStep={currentStep}
         stepTitle="Selecionar Servicos"
         stepSubtitle="Escolha um ou mais servicos para compor a ordem."
-      />
+      >
+        {
+          <ActionButton
+            onClick={() =>
+              handleOpenModal && handleOpenModal(MODAL_TYPE.SERVICE)
+            }
+            disabled={false}
+            startIcon={<AddOutlinedIcon fontSize="small" />}
+            variant="primary"
+          >
+            Novo
+          </ActionButton>
+        }
+      </StepHeader>
       <div className="content-separator-horizontal"></div>
       <section className="step-servies_list">
         {serviceLoading ? (

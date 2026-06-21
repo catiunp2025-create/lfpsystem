@@ -35,6 +35,7 @@ import StepCustomer from "./step_customer/StepCustomer";
 import StepServices from "./step_services/StepServices";
 import StepFinal from "./step_final/StepFinal";
 import OrderReview from "./order_review/OrderReview";
+import ServiceForm from "./service_form/ServiceForm";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -242,6 +243,7 @@ function NewOrderService() {
   const modalsConfig: Record<ModalType, React.ComponentType<any>> = {
     [MODAL_TYPE.VEHICLE]: VehicleForm,
     [MODAL_TYPE.CUSTOMER]: CustomerForm,
+    [MODAL_TYPE.SERVICE]: ServiceForm,
     [MODAL_TYPE.ORDER_REVIEW]: OrderReview,
   };
   const CurrentModalOpen = activeModal ? modalsConfig[activeModal] : null;
@@ -286,7 +288,12 @@ function NewOrderService() {
     {
       component: StepServices,
       props: {
+        refresh,
         handleToggleService,
+      },
+      modal: {
+        component: CurrentModalOpen,
+        props: { handleCloseModal },
       },
     },
     {
