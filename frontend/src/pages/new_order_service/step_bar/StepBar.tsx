@@ -24,6 +24,10 @@ export function Steppers({
       return "active";
     }
 
+    if (completedSteps.has(step) && currentStep < step) {
+      return "visited";
+    }
+
     if (completedSteps.has(step)) {
       return "completed";
     }

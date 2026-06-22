@@ -1,8 +1,22 @@
-function ModalCard() {
+import type React from "react";
+import "./style.css";
+
+type ModalCardProps = {
+  children: React.ReactNode;
+  title: string;
+  titleIcon?: React.ReactNode;
+};
+
+function ModalCard({ children, title, titleIcon }: ModalCardProps) {
   return (
-    <div>
-      <h3>Componente Modal padrão</h3>
-      <p>Componente para usar como base de modals</p>
+    <div className="modal-background">
+      <div className="modal-content">
+        <div className="modal-header">
+          {titleIcon}
+          <h2 className="modal-title">{title}</h2>
+        </div>
+        {children}
+      </div>
     </div>
   );
 }

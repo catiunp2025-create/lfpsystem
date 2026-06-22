@@ -16,6 +16,7 @@ import api from "../../../services/api";
 import ActionButton from "../../../components/action_button/ActionButton";
 
 type StepVehicleProps = BaseStepProps & {
+  refresh: number;
   handleSelectVehicleStep: (vehicle: Vehicle) => void;
   handleSelectVehicleUserStep: (
     vehicleUser: VehicleUser,
@@ -29,6 +30,7 @@ function StepVehicle({
   onNext,
   validateStep,
   handleOpenModal,
+  refresh,
   handleSelectVehicleStep,
   handleSelectVehicleUserStep,
 }: StepVehicleProps) {
@@ -77,6 +79,10 @@ function StepVehicle({
     fetchVehicleListData();
     fetchVehicleUserListData();
   }, []);
+
+  useEffect(() => {
+    fetchVehicleListData();
+  }, [refresh]);
 
   return (
     <div className="step-vehicle">
@@ -140,8 +146,11 @@ function StepVehicle({
               <div className="loading-skeleton">Carregando dados...</div>
             ) : errorEmployees ? (
               <div>
-                <span>{errorVehicles}</span>
-                <button className="button-retry" onClick={fetchVehicleListData}>
+                <span>{errorEmployees}</span>
+                <button
+                  className="button-retry"
+                  onClick={fetchVehicleUserListData}
+                >
                   Tentar novamente
                 </button>
               </div>
@@ -169,8 +178,11 @@ function StepVehicle({
               <div className="loading-skeleton">Carregando dados...</div>
             ) : errorEmployees ? (
               <div>
-                <span>{errorVehicles}</span>
-                <button className="button-retry" onClick={fetchVehicleListData}>
+                <span>{errorEmployees}</span>
+                <button
+                  className="button-retry"
+                  onClick={fetchVehicleUserListData}
+                >
                   Tentar novamente
                 </button>
               </div>

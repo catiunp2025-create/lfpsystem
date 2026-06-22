@@ -16,7 +16,7 @@
   color: #ffffff;
 
   flex-shrink: 0;
-  z-index: 1000;
+  z-index: 50;
   cursor: default;
 
   border-bottom: 1px solid var(--color-border-soft);

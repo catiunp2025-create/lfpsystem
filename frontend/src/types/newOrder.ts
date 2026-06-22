@@ -46,6 +46,7 @@ export type TypeVehicleUser =
 export const MODAL_TYPE = {
   VEHICLE: "vehicle",
   CUSTOMER: "customer",
+  SERVICE: "service",
   ORDER_REVIEW: "order_review",
 } as const;
 
@@ -54,4 +55,8 @@ export type ModalType = (typeof MODAL_TYPE)[keyof typeof MODAL_TYPE];
 export type StepConfig = {
   component: React.ComponentType<any>;
   props?: Record<string, unknown>;
+  modal?: {
+    component: React.ComponentType<any> | null;
+    props: Record<string, unknown>;
+  };
 };

@@ -14,6 +14,7 @@ import SearchBar from "../../../components/search_bar/SearchBar";
 import SelectableCard from "../../../components/selectable_card/SelectableCard";
 
 type StepCustomerProps = BaseStepProps & {
+  refresh: number,
   handleSelectCustomerStep: (customer: Customer) => void;
   handleSelectAddressStep: (address: Address) => void;
 };
@@ -25,6 +26,7 @@ function StepCustomer({
   onNext,
   validateStep,
   handleOpenModal,
+  refresh,
   handleSelectCustomerStep,
   handleSelectAddressStep,
 }: StepCustomerProps) {
@@ -54,7 +56,7 @@ function StepCustomer({
 
   useEffect(() => {
     fetchCustomerList();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="step-customer">

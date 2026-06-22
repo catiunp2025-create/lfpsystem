@@ -76,8 +76,6 @@ export const requiredCustomerFields: (keyof Customer)[] = [
   "id",
   "name",
   "identification",
-  "address",
-  "contact",
 ];
 
 export const initialStepData: StepData = {

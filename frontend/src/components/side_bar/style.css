@@ -12,7 +12,7 @@
   flex-direction: column;
   overflow: hidden;
   padding: 0;
-  z-index: 999;
+  z-index: 50;
 }
 
 .sidebar-inner {
@@ -48,6 +48,25 @@
 .sidebar-links .menu-separator {
   transition-delay: 0s;
   transform: scaleX(0);
+}
+
+.sidebar-links button {
+  display: flex;
+  align-items: center;
+  color: #dbd4e3;
+  gap: 0 20px;
+  font-weight: 500;
+  padding: 15px 15px;
+  white-space: nowrap;
+  border: none;
+  background: none;
+  width: 100%;
+}
+
+.sidebar-links button:hover {
+  background: #ffffff2d;
+  color: #fff;
+  border-radius: 4px;
 }
 
 .sidebar-links h4 {

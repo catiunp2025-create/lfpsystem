@@ -35,6 +35,8 @@ import StepCustomer from "./step_customer/StepCustomer";
 import StepServices from "./step_services/StepServices";
 import StepFinal from "./step_final/StepFinal";
 import OrderReview from "./order_review/OrderReview";
+import ServiceForm from "./service_form/ServiceForm";
+import dayjs from "dayjs";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -62,27 +64,12 @@ export function validateRequiredFields<T extends object>(
 function NewOrderService() {
   const [currentStep, setCurrentStep] = useState<StepNumber>(1);
   const [visitedSteps, setVisitedSteps] = useState<Set<StepNumber>>(new Set());
+  const [refresh, setRefresh] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<Set<StepNumber>>(
     new Set(),
   );
   const [currentStepData, setCurrentStepData] =
     useState<StepData>(initialStepData);
-
-  // Para chamar abrir os modals de novo registro e confirmação da OS
-  const [activeModal, setActiveModal] = useState<ModalType | null>(null);
-  const modalsConfig = {
-    [MODAL_TYPE.VEHICLE]: VehicleForm,
-    [MODAL_TYPE.CUSTOMER]: CustomerForm,
-    [MODAL_TYPE.ORDER_REVIEW]: OrderReview,
-  };
-  const CurrentModalOpen = activeModal ? modalsConfig[activeModal] : null;
-
-  // Permite ir para as steps já visitadas
-  const handleStepChange = (step: StepNumber) => {
-    if (visitedSteps.has(step) || completedSteps.has(step)) {
-      setCurrentStep(step);
-    }
-  };
 
   // Concluir step atual, marca step seguinte como visitada e avança para ela
   const handleNextStep = () => {
@@ -156,7 +143,7 @@ function NewOrderService() {
     },
 
     4: {
-      validate: () => currentStepData.scheduleDate !== undefined,
+      validate: () => dayjs(currentStepData.scheduleDate).isValid(),
     },
   } as const;
 
@@ -249,7 +236,18 @@ function NewOrderService() {
   // Fecha modal aberto, de acordo com step atual
   const handleCloseModal = () => {
     setActiveModal(null);
+    setRefresh((prev) => prev + 1);
   };
+
+  // Para abrir e fechar os modals de novo registro e confirmação da OS
+  const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+  const modalsConfig: Record<ModalType, React.ComponentType<any>> = {
+    [MODAL_TYPE.VEHICLE]: VehicleForm,
+    [MODAL_TYPE.CUSTOMER]: CustomerForm,
+    [MODAL_TYPE.SERVICE]: ServiceForm,
+    [MODAL_TYPE.ORDER_REVIEW]: OrderReview,
+  };
+  const CurrentModalOpen = activeModal ? modalsConfig[activeModal] : null;
 
   // Props base para todas as steps
   const baseProps: BaseStepProps = {
@@ -267,34 +265,61 @@ function NewOrderService() {
     {
       component: StepVehicle,
       props: {
+        refresh,
         handleSelectVehicleStep,
         handleSelectVehicleUserStep,
+      },
+      modal: {
+        component: CurrentModalOpen,
+        props: { handleCloseModal },
       },
     },
     {
       component: StepCustomer,
       props: {
+        refresh,
         handleSelectCustomerStep,
         handleSelectAddressStep,
+      },
+      modal: {
+        component: CurrentModalOpen,
+        props: { handleCloseModal },
       },
     },
     {
       component: StepServices,
       props: {
+        refresh,
         handleToggleService,
+      },
+      modal: {
+        component: CurrentModalOpen,
+        props: { handleCloseModal },
       },
     },
     {
       component: StepFinal,
       props: {
+        refresh,
         handleScheduleDateChange,
         handleObservationsChange,
+      },
+      modal: {
+        component: CurrentModalOpen,
+        props: { currentStepData, handleCloseModal },
       },
     },
   ];
 
   // Define a step atual a ser renderizada com suas determinadas props
   const CurrentStep = stepsConfig[currentStep - 1];
+
+  // Permite ir para as steps já visitadas
+  const handleStepChange = (step: StepNumber) => {
+    if (visitedSteps.has(step) || completedSteps.has(step)) {
+      setCurrentStep(step);
+    }
+  };
 
   return (
     <MainLayout pageTitle="Nova ordem de serviço">
@@ -316,14 +341,14 @@ function NewOrderService() {
       {CurrentModalOpen && (
         <div className="modal-overlay">
           <div className="modal-container">
-            <CurrentModalOpen {...baseProps} />
+            {CurrentStep.modal && CurrentStep.modal.component && (
+              <CurrentStep.modal.component {...CurrentStep.modal.props} />
+            )}
           </div>
         </div>
       )}
-
     </MainLayout>
   );
-
 }
 
 export default NewOrderService;
