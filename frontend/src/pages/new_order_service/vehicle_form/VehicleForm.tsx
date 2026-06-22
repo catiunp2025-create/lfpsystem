@@ -56,13 +56,13 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
         <TextField
           label="Placa"
           required={true}
-          {...register("color")}
+          {...register("plate")}
           sx={{ width: 320, background: "white" }}
         />
         <TextField
           label="Cor"
           required={true}
-          {...register("plate")}
+          {...register("color")}
           sx={{ width: 320, background: "white" }}
         />
       </form>
