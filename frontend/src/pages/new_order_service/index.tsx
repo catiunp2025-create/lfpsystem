@@ -36,6 +36,7 @@ import StepServices from "./step_services/StepServices";
 import StepFinal from "./step_final/StepFinal";
 import OrderReview from "./order_review/OrderReview";
 import ServiceForm from "./service_form/ServiceForm";
+import dayjs from "dayjs";
 
 export function validateRequiredFields<T extends object>(
   obj: T,
@@ -142,7 +143,7 @@ function NewOrderService() {
     },
 
     4: {
-      validate: () => currentStepData.scheduleDate !== undefined,
+      validate: () => dayjs(currentStepData.scheduleDate).isValid(),
     },
   } as const;
 
@@ -305,7 +306,7 @@ function NewOrderService() {
       },
       modal: {
         component: CurrentModalOpen,
-        props: { handleCloseModal },
+        props: { currentStepData, handleCloseModal },
       },
     },
   ];

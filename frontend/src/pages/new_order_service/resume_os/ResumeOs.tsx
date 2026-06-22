@@ -25,7 +25,6 @@ export function ResumeOs({ currentStepData }: ResumeOsProps) {
   const totalValueServices = currentStepData.services
     .reduce((acc, service) => acc + service.value, 0)
     .toFixed(2);
-
   return (
     <div className="resume-os">
       <div className="resume-os_title">
@@ -145,7 +144,9 @@ export function ResumeOs({ currentStepData }: ResumeOsProps) {
         <section>
           <p className="resume-os_label">DATA PREVISTA</p>
           {currentStepData.scheduleDate ? (
-            <p className="resume-os_primary">{dayjs(currentStepData.scheduleDate).format("DD/MM/YYYY")}</p>
+            <p className="resume-os_primary">
+              {dayjs(currentStepData.scheduleDate).format("DD/MM/YYYY")}
+            </p>
           ) : (
             <p className="resume-os_value-empty">Não definida</p>
           )}

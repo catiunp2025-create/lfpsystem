@@ -20,11 +20,6 @@ export function Steppers({
 
   // Configura visual das steps de acordo com estado para cada step
   function getStepStatus(step: StepNumber): StepStatus {
-    console.log("COMPLETED",completedSteps)
-    console.log("VISITED",visitedSteps)
-    console.log("VISITED",visitedSteps)
-    console.log("STEP",step)
-    console.log("CURENTSTEP",currentStep)
     if (step === currentStep) {
       return "active";
     }
