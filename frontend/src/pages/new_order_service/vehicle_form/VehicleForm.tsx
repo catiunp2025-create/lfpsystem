@@ -1,9 +1,11 @@
 import ModalCard from "../../../components/modal_card/ModalCard";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import api from "../../../services/api";
 import ActionButton from "../../../components/action_button/ActionButton";
 import { TextField } from "@mui/material";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import { IMaskInput } from "react-imask";
+import { masks } from "../../../utils/Masks";
 
 type VehicleFormProps = {
   handleCloseModal: () => void;
@@ -21,6 +23,7 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
     handleSubmit,
     formState: { isValid },
     reset,
+    control,
   } = useForm<VehicleInput>({
     mode: "onChange",
     defaultValues: { model: "", color: "", plate: "" },
@@ -53,11 +56,29 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
           {...register("model")}
           sx={{ width: 320, background: "white" }}
         />
-        <TextField
-          label="Placa"
-          required={true}
-          {...register("plate")}
-          sx={{ width: 320, background: "white" }}
+        <Controller
+          name="plate"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              label="Placa"
+              required={true}
+              sx={{ width: 320, background: "white" }}
+              value={field.value}
+              slotProps={{
+                input: {
+                  inputComponent: IMaskInput as any,
+                  inputProps: {
+                    mask: masks.plate,
+                    prepare: (value: string) => value.toUpperCase(),
+                    onAccept: (value: string) => {
+                      field.onChange(value);
+                    },
+                  },
+                },
+              }}
+            />
+          )}
         />
         <TextField
           label="Cor"
