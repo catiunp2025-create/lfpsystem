@@ -22,7 +22,7 @@ function Login() {
 
       if (accessToken) {
         localStorage.setItem("token", accessToken);
-        navigate("/home");
+        navigate("/dashboard");
       }
     } catch (error: any) {
       if (error.response.status === 401) {

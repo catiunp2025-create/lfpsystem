@@ -1,4 +1,4 @@
-import type { OrderServiceStatus } from "../../../packages/shared/src";
+import type { OrderServiceStatus } from "../../../../packages/shared/src";
 
 export type Service = {
   id: string;
@@ -11,7 +11,7 @@ export type AllOrderService = {
   id: string;
   date: Date;
   status: OrderServiceStatus;
-  services: { service: Service}[];
+  services: { service: Service }[];
 };
 
 export type ApiData = {
@@ -23,4 +23,4 @@ export type ApiData = {
 export type ChartData = {
   dateKey: string;
   total: string;
-}
+};

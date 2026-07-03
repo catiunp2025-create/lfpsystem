@@ -1,0 +1,62 @@
+@import "../../styles/variables.css";
+
+.card {
+  background:
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
+    linear-gradient(120deg, transparent, transparent) border-box;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  gap: 8px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-title {
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+}
+
+.card h2 {
+  font-size: 22px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.card-sub {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
+    linear-gradient(120deg, orange, rgba(255, 140, 0, 0.2)) border-box;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    0 0 15px rgba(250, 204, 21, 0.15);
+}
+
+.card:hover h2 {
+  text-shadow: var(--shadow-text-h2);
+}
+
+.card:hover .card-title {
+  text-shadow: var(--shadow-text-title);
+}
+
+.card:hover .card-sub {
+  text-shadow: var(--shadow-text-sub);
+}
