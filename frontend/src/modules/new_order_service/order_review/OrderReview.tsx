@@ -32,7 +32,7 @@ function OrderReview({ currentStepData, handleCloseModal }: OrderReviewProps) {
         serviceIds: currentStepData.services.map((s) => s.id),
       });
 
-      navigate("/home");
+      navigate("/dashboard");
     } catch {
       alert("Erro ao criar ordem de serviço.");
     }

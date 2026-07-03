@@ -10,5 +10,5 @@ CREATE TYPE "OrderServiceStatus_new" AS ENUM ('AVAILABLE', 'FINISHED');
 ALTER TABLE "order_service" ALTER COLUMN "status" TYPE "OrderServiceStatus_new" USING ("status"::text::"OrderServiceStatus_new");
 ALTER TYPE "OrderServiceStatus" RENAME TO "OrderServiceStatus_old";
 ALTER TYPE "OrderServiceStatus_new" RENAME TO "OrderServiceStatus";
-DROP TYPE "public"."OrderServiceStatus_old";
+DROP TYPE "OrderServiceStatus_old";
 COMMIT;
