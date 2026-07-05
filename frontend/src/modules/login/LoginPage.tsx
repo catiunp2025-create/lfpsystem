@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import api from "../../services/api";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/OLC.png";
 import { TopBarLogin } from "../../components/top_bar_login/TopBarLogin";
 
 function Login() {
@@ -35,22 +36,28 @@ function Login() {
   return (
     <div className="container-login">
       <TopBarLogin />
-      <form onSubmit={userLogin}>
-        <h1>Login</h1>
-        <input
-          placeholder="Digite seu email"
-          name="email"
-          type="email"
-          ref={inputEmail}
-        />
-        <input
-          placeholder="Digite sua senha"
-          name="password"
-          type="password"
-          ref={inputPass}
-        />
-        <button type="submit">Entrar</button>
-      </form>
+      <div className="login-card">
+        <div className="login-banner">
+          <img src={logo} alt="Limpa Fossa Parnamirim" />
+
+          <div className="banner-content">
+            <h2>Limpa Fossa Parnamirim</h2>
+
+            <p>Serviço Confiável</p>
+            <p>Resultados Profissionais</p>
+          </div>
+        </div>
+
+        <form onSubmit={userLogin}>
+          <h1>Entrar</h1>
+
+          <input type="email" placeholder="E-mail" ref={inputEmail} />
+
+          <input type="password" placeholder="Senha" ref={inputPass} />
+
+          <button>Entrar</button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 @import "../../styles/variables.css";
 
-.content-home {
+.content-dashboard {
   flex: 1;
   display: flex;
   flex-direction: column;

@@ -1,8 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { type ReactNode } from "react";
-import Login from "./modules/login";
 import Dashboard from "./modules/dashboard/DashboardPage";
 import NewOrderService from "./modules/new_order_service";
+import Login from "./modules/login/LoginPage";
 
 function PrivateRoute({ children }: { children: ReactNode }) {
   const token = localStorage.getItem("token");

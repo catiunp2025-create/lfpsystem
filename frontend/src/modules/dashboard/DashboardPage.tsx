@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import "./style.css";
+import { useEffect } from "react";
 import MainLayout from "../../components/layout/MainLayout";
 import { formatCurrency } from "../../utils/FormatCurrency";
 import { useDashboard } from "./hooks/useDashboard";
@@ -29,7 +29,7 @@ function Dashboard() {
 
   return (
     <MainLayout pageTitle="Início">
-      <main className="content-home">
+      <main className="content-dashboard">
         <header className="dashboard-header">
           <h1>Dashboard</h1>
           <span>{`${dataMonth} ${currentYear}`}</span>
