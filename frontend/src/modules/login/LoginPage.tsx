@@ -2,13 +2,15 @@ import React, { useRef } from "react";
 import api from "../../services/api";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/OLC.png";
+import logo from "../../assets/LFP-Logo.png";
 import { TopBarLogin } from "../../components/top_bar_login/TopBarLogin";
+import { useMediaQuery } from "@mui/material";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPass = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   async function userLogin(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,6 +49,12 @@ function Login() {
             <p>Resultados Profissionais</p>
           </div>
         </div>
+
+        {isMobile && (
+          <div className="login-banner_mobile">
+            <img src={logo} alt="Limpa Fossa Parnamirim" />
+          </div>
+        )}
 
         <form onSubmit={userLogin}>
           <h1>Entrar</h1>

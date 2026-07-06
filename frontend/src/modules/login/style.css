@@ -102,9 +102,26 @@
 }
 
 .login-banner img {
-  width: 260px;
+  width: 240px;
   max-width: 80%;
   height: auto;
+}
+
+.login-banner_mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px 0;
+  margin-bottom: 12px;
+
+  background: rgba(22, 35, 69, 0.04);
+
+  border-radius: 12px;
+}
+
+.login-banner_mobile img {
+  width: 150px;
 }
 
 .banner-content {
@@ -223,6 +240,7 @@
   }
 
   .login-card {
+    flex-direction: column;
     width: 100%;
   }
 
