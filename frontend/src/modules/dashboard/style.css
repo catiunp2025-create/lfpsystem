@@ -57,7 +57,8 @@
   letter-spacing: 0.08em;
 }
 
-.card.full {
+.chart_card {
+  border-radius: 10px;
   margin-top: 10px;
   padding: 16px;
   gap: 10px;
@@ -66,6 +67,7 @@
   min-height: 0;
   flex-direction: column;
   color: var(--color-text-primary);
+  background: var(--color-card-bg);
 }
 
 .chart-area {
@@ -80,4 +82,24 @@
   border-radius: 12px;
   background: var(--color-border-soft);
   animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart-area {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chart {
+    display: none;
+  }
 }

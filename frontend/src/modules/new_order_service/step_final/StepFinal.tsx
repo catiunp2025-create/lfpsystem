@@ -11,6 +11,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import ActionButton from "../../../components/action_button/ActionButton";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
+import { TextField, useMediaQuery } from "@mui/material";
 
 type StepFinalProps = BaseStepProps & {
   handleScheduleDateChange: (value: string | null) => void;
@@ -30,6 +31,7 @@ function StepFinal({
   dayjs.updateLocale("pt-br", {
     weekdaysMin: ["D", "S", "T", "Q", "Q", "S", "S"],
   });
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   return (
     <div className="step-final">
@@ -41,41 +43,70 @@ function StepFinal({
       <div className="content-separator-horizontal"></div>
       <section className="step-final_content">
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
-          <DatePicker
-            label="Data prevista"
-            minDate={dayjs()}
-            value={
-              currentStepData.scheduleDate
-                ? dayjs(currentStepData.scheduleDate)
-                : null
-            }
-            slotProps={{
-              textField: {
-                fullWidth: true,
-                size: "small",
-                sx: {
-                  maxWidth: 320,
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: "var(--color-primary)",
-                  },
-
-                  "& .MuiPickersOutlinedInput-notchedOutline": {
-                    borderColor: "#CBD5E1",
-                  },
-
-                  "& .MuiPickersInputBase-root.Mui-focused .MuiPickersOutlinedInput-notchedOutline":
-                    {
-                      borderColor: "var(--color-primary) !important",
-                      borderWidth: 1,
-                      boxShadow: "var(--shadow-selected-card)",
-                    },
+          {isMobile ? (
+            <TextField
+              fullWidth
+              type="date"
+              label="Data prevista"
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
                 },
-              },
-            }}
-            onChange={(value) =>
-              handleScheduleDateChange(value?.format("YYYY-MM-DD") ?? null)
-            }
-          />
+              }}
+              value={currentStepData.scheduleDate ?? ""}
+              onChange={(e) => handleScheduleDateChange(e.target.value)}
+            />
+          ) : (
+            <DatePicker
+              label="Data prevista"
+              minDate={dayjs()}
+              value={
+                currentStepData.scheduleDate
+                  ? dayjs(currentStepData.scheduleDate)
+                  : null
+              }
+              slotProps={{
+                openPickerButton: {
+                  sx: {
+                    padding: 0,
+                    margin: 0,
+                    minWidth: 0,
+                    width: 32,
+                    height: 32,
+                  },
+                },
+                textField: {
+                  fullWidth: true,
+                  sx: {
+                    width: "100%",
+                    minWidth: 0,
+                    maxWidth: {
+                      xs: "100%",
+                      sm: 320,
+                    },
+                    boxSizing: "border-box",
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "var(--color-primary)",
+                    },
+
+                    "& .MuiPickersOutlinedInput-notchedOutline": {
+                      borderColor: "#CBD5E1",
+                    },
+
+                    "& .MuiPickersInputBase-root.Mui-focused .MuiPickersOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "var(--color-primary) !important",
+                        borderWidth: 1,
+                        boxShadow: "var(--shadow-selected-card)",
+                      },
+                  },
+                },
+              }}
+              onChange={(value) =>
+                handleScheduleDateChange(value?.format("YYYY-MM-DD") ?? null)
+              }
+            />
+          )}
         </LocalizationProvider>
         <textarea
           className="step-final_observations"

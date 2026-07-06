@@ -12,9 +12,10 @@ import StepToolbar from "../step_toolbar/StepToolbar";
 import api from "../../../services/api";
 import SearchBar from "../../../components/search_bar/SearchBar";
 import SelectableCard from "../../../components/selectable_card/SelectableCard";
+import { useMediaQuery } from "@mui/material";
 
 type StepCustomerProps = BaseStepProps & {
-  refresh: number,
+  refresh: number;
   handleSelectCustomerStep: (customer: Customer) => void;
   handleSelectAddressStep: (address: Address) => void;
 };
@@ -34,6 +35,7 @@ function StepCustomer({
   const [customerLoading, setCustomerLoading] = useState(false);
   const [customerError, setCustomerError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   async function fetchCustomerList() {
     setCustomerLoading(true);
@@ -42,7 +44,6 @@ function StepCustomer({
     try {
       const response = await api.get("/customers");
       setCustomers(response.data);
-      
     } catch (error) {
       setCustomerError("Não foi possível listar clientes");
     } finally {
@@ -104,7 +105,11 @@ function StepCustomer({
                   <SelectableCard
                     title={customer.name}
                     subtitle={`${customer.identification.type}: ${customer.identification.value}`}
-                    icon={customer.name.charAt(0).toUpperCase()}
+                    icon={
+                      !isMobile
+                        ? customer.name.charAt(0).toUpperCase()
+                        : undefined
+                    }
                     isSelected={currentStepData.customer.id === customer.id}
                     onClick={() => handleSelectCustomerStep(customer)}
                   />
@@ -114,9 +119,21 @@ function StepCustomer({
                       {customer.address.map((address) => (
                         <SelectableCard
                           key={address.id}
-                          title={`${address.street}, ${address.number} - ${address.complement}`}
-                          subtitle={`${address.neighborhood} - ${address.city}/${address.state} - ${address.postCode}`}
-                          icon={<PlaceOutlinedIcon fontSize="small" />}
+                          title={
+                            isMobile
+                              ? `${address.street}, ${address.number}`
+                              : `${address.street}, ${address.number} - ${address.complement}`
+                          }
+                          subtitle={
+                            isMobile
+                              ? `${address.city}/${address.state}`
+                              : `${address.neighborhood} - ${address.city}/${address.state} - ${address.postCode}`
+                          }
+                          icon={
+                            !isMobile ? (
+                              <PlaceOutlinedIcon fontSize="small" />
+                            ) : undefined
+                          }
                           isSelected={currentStepData.address.id === address.id}
                           onClick={() => handleSelectAddressStep(address)}
                         />

@@ -168,7 +168,7 @@
 }
 
 @media (max-width: 1024px) {
-  .stepper-container {
+  .steppers-container {
     padding: 16px;
     overflow-x: auto;
     gap: 12px;
@@ -185,14 +185,23 @@
   .step-connector {
     min-width: 50px;
   }
+
+  .step-button {
+    min-width: auto;
+  }
 }
 
 @media (max-width: 768px) {
+  .steppers-container {
+    padding: 10px;
+  }
+
   .step-details {
     display: none;
   }
 
   .step-button {
+    min-width: auto;
     gap: 8px;
   }
 
@@ -200,5 +209,10 @@
     width: 30px;
     height: 30px;
     font-size: 13px;
+  }
+
+  .step-connector {
+    min-width: 18px;
+    margin: 0 6px;
   }
 }

@@ -12,7 +12,7 @@
   flex: 1;
 
   display: flex;
-  justify-items: center;
+  justify-content: center;
 
   background: transparent;
 
@@ -52,4 +52,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .step-customer_list {
+    overflow: visible;
+  }
+
+  .step-customer_addresses {
+    margin-left: 12px;
+    margin-right: 0;
+    padding-left: 12px;
+  }
+
+  .step-customer_footer {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .step-customer_footer button {
+    width: 100%;
+  }
 }

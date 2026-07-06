@@ -24,3 +24,15 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  .step-services_footer {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .step-services_footer button {
+    width: 100%;
+  }
+}

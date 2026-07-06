@@ -61,7 +61,7 @@ function Dashboard() {
         </section>
 
         <section className="chart">
-          <div className="full card">
+          <div className="chart_card">
             <span className="chart-title">Faturamento Mensal</span>
             {loading ? (
               <div className="chart-skeleton">Carregando dados...</div>

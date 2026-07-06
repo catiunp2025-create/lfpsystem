@@ -24,7 +24,7 @@
 }
 
 .resume-content {
-  width: 380px;
+  min-width: 0;
 }
 
 .step-list-titles {
@@ -36,4 +36,21 @@
 
   padding: 5px;
   margin: 10px;
+}
+
+@media (max-width: 1024px) {
+  .content-steppers {
+    display: block;
+    overflow: visible;
+    overflow-y: auto;
+  }
+
+  .step-content {
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .resume-content {
+    display: none;
+  }
 }

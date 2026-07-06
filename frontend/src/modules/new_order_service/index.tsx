@@ -345,7 +345,7 @@ function NewOrderService() {
               <CurrentStep.modal.component {...CurrentStep.modal.props} />
             )}
           </div>
-        </div>
+        </div>  
       )}
     </MainLayout>
   );

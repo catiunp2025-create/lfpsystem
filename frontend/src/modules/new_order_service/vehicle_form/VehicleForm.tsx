@@ -53,8 +53,9 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
         <TextField
           label="Modelo"
           required={true}
+          fullWidth
           {...register("model")}
-          sx={{ width: 320, background: "white" }}
+          sx={{ width: "100%", maxWidth: 320, background: "white" }}
         />
         <Controller
           name="plate"
@@ -63,7 +64,8 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
             <TextField
               label="Placa"
               required={true}
-              sx={{ width: 320, background: "white" }}
+              fullWidth
+              sx={{ width: "100%", maxWidth: 320, background: "white" }}
               value={field.value}
               slotProps={{
                 input: {
@@ -83,8 +85,9 @@ function VehicleForm({ handleCloseModal }: VehicleFormProps) {
         <TextField
           label="Cor"
           required={true}
+          fullWidth
           {...register("color")}
-          sx={{ width: 320, background: "white" }}
+          sx={{ width: "100%", maxWidth: 320, background: "white" }}
         />
       </form>
       <div className="modal_footer">

@@ -9,6 +9,7 @@ import api from "../../../services/api";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import KeyboardBackspaceOutlinedIcon from "@mui/icons-material/KeyboardBackspaceOutlined";
+import { useMediaQuery } from "@mui/material";
 
 type StepServicesProps = BaseStepProps & {
   refresh: number;
@@ -28,6 +29,7 @@ function StepServices({
   const [services, setServices] = useState<Service[]>([]);
   const [serviceLoading, setServiceLoading] = useState(false);
   const [serviceError, setServiceError] = useState<string | null>(null);
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   async function fetchServiceList() {
     setServiceLoading(true);
@@ -92,6 +94,7 @@ function StepServices({
               selected={currentStepData.services.some(
                 (item) => item.id === service.id,
               )}
+              compact={isMobile}
               onClick={() => handleToggleService(service)}
             />
           ))

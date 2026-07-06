@@ -7,10 +7,16 @@ import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 type ServiceCardProps = {
   service: Service;
   selected: boolean;
+  compact?: boolean;
   onClick: () => void;
 };
 
-function ServiceCard({ service, selected, onClick }: ServiceCardProps) {
+function ServiceCard({
+  service,
+  selected,
+  compact,
+  onClick,
+}: ServiceCardProps) {
   return (
     <button
       className={`service-card ${selected ? "selected" : ""}`}
@@ -36,7 +42,9 @@ function ServiceCard({ service, selected, onClick }: ServiceCardProps) {
 
       <div className="service-card_content">
         <h3 className="service-card_title">{service.name}</h3>
-        <p className=".service-card_description">{service.description}</p>
+        {!compact && (
+          <p className="service-card_description">{service.description}</p>
+        )}
       </div>
 
       <span className="service-card_value">

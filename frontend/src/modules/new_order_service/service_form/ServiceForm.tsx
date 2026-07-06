@@ -53,7 +53,8 @@ function ServiceForm({ handleCloseModal }: ServiceFormProps) {
           label="Nome"
           required={true}
           {...register("name")}
-          sx={{ width: 320, background: "white" }}
+          fullWidth
+          sx={{ width: "100%", maxWidth: 320, background: "white" }}
         />
         <Controller
           name="value"
@@ -62,7 +63,9 @@ function ServiceForm({ handleCloseModal }: ServiceFormProps) {
             <NumericFormat
               customInput={TextField}
               label="Valor"
-              sx={{ width: 320, background: "white" }}
+              required={true}
+              fullWidth
+              sx={{ width: "100%", maxWidth: 320, background: "white" }}
               value={field.value || ""}
               thousandSeparator="."
               decimalSeparator=","
@@ -81,7 +84,8 @@ function ServiceForm({ handleCloseModal }: ServiceFormProps) {
           minRows={3}
           maxRows={8}
           {...register("description")}
-          sx={{ width: 320, background: "white" }}
+          fullWidth
+          sx={{ width: "100%", maxWidth: 320, background: "white" }}
         />
       </form>
       <div className="modal_footer">
