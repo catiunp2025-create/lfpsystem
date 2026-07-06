@@ -53,7 +53,7 @@ function Sidebar({ open }: SidebarProps) {
             <div className="menu-separator"></div>
           </h4>
           <li>
-            <Link to="/home">
+            <Link to="/dashboard">
               <SpaceDashboardOutlinedIcon /> Dashboard
             </Link>
           </li>

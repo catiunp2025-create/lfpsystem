@@ -8,6 +8,7 @@
   --color-card-bg: #0f172a;
   --color-content-bg: transparent;
   --color-select-card-bg: #f4f4f4;
+  --color-bg-accent: #1b315c;
   --color-bg-dark: #08142b;
   --color-bg-light: #dbeafc;
   --color-bg-disable: #E2E8F0;
@@ -40,6 +41,9 @@
   --title-section: 1.1rem;
   --body-total: 1.5rem;
   --title-main: 2rem;
+  --info-card-title-size: 0.75rem;
+  --info-card-value-size: 1.4rem;
+  --info-card-subtitle-size: 0.8rem;
 
   /* FONT WEIGHT */
   --font-regular: 400;

@@ -1,0 +1,121 @@
+@import "../../styles/variables.css";
+
+.card {
+  background:
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
+    linear-gradient(120deg, transparent, transparent) border-box;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  max-width: none;
+  gap: 8px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-title {
+  font-size: var(--info-card-title-size);
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.08em;
+}
+
+.card h2 {
+  font-size: var(--info-card-value-size);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.card-sub {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: var(--info-card-subtitle-size);
+  color: var(--color-text-muted);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
+    linear-gradient(120deg, orange, rgba(255, 140, 0, 0.2)) border-box;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.35),
+    0 0 15px rgba(250, 204, 21, 0.15);
+}
+
+.card:hover h2 {
+  text-shadow: var(--shadow-text-h2);
+}
+
+.card:hover .card-title {
+  text-shadow: var(--shadow-text-title);
+}
+
+.card:hover .card-sub {
+  text-shadow: var(--shadow-text-sub);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --info-card-title-size: 0.7rem;
+    --info-card-value-size: 1.2rem;
+    --info-card-subtitle-size: 0.75rem;
+  }
+
+  .card {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .card-title {
+    font-size: 11px;
+  }
+
+  .card h2 {
+    font-size: 19px;
+  }
+
+  .card-sub {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --info-card-title-size: 0.65rem;
+    --info-card-value-size: 1.05rem;
+    --info-card-subtitle-size: 0.7rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .card-title {
+    font-size: 10px;
+  }
+
+  .card h2 {
+    font-size: 17px;
+  }
+
+  .card-sub {
+    font-size: 11px;
+  }
+
+  .chart {
+    display: none;
+  }
+}

@@ -1,0 +1,105 @@
+@import "../../styles/variables.css";
+
+.content-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  color: #000;
+  font-family: "Inter", sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: default;
+  margin: 10px;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.dashboard-header span {
+  font-size: 22px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0 10px;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  margin: 10px;
+  padding: 5px;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.chart_card {
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 16px;
+  gap: 10px;
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  color: var(--color-text-primary);
+  background: var(--color-card-bg);
+}
+
+.chart-area {
+  flex: 1;
+  width: 100%;
+  min-height: 300px;
+}
+
+.chart-skeleton {
+  width: 100%;
+  min-height: 300px;
+  border-radius: 12px;
+  background: var(--color-border-soft);
+  animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .chart-area {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chart {
+    display: none;
+  }
+}

@@ -1,0 +1,54 @@
+@import "../../../styles/variables.css";
+
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  min-height: 0;
+  gap: var(--spacing-lg);
+}
+
+.step-header_details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.step-header_details .step-header_title {
+  color: var(--color-primary-dark);
+}
+
+.step-header_actions {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .step-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .step-header_details h2 {
+    font-size: 1.8rem;
+    gap: 2px;
+  }
+
+  .step-header_details > p:last-child {
+    font-size: 0.95rem;
+  }
+
+  .step-header_actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .step-header_actions > * {
+    width: 100%;
+  }
+}

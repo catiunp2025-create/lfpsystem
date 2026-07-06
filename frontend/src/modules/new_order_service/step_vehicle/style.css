@@ -1,0 +1,73 @@
+@import "../../../styles/variables.css";
+
+.step-vehicle {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  min-height: 0;
+}
+
+.step-vehicle_content {
+  flex: 1;
+
+  display: flex;
+  align-items: stretch;
+
+  background: transparent;
+
+  gap: var(--spacing-md);
+  padding: 10px;
+  border-radius: 10px;
+
+  min-height: 0;
+}
+
+.step-vehicle_lists {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.step-vehicle_list-vehicles,
+.step-vehicle_list-drivers,
+.step-vehicle_list-assistants {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  gap: 12px;
+  padding-right: 4px;
+  padding-top: 1px;
+  min-height: 0;
+}
+
+.step-vehicle_footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+  .step-vehicle_content {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+  }
+
+  .step-vehicle_lists {
+    flex: none;
+  }
+
+  .step-vehicle_list-vehicles,
+  .step-vehicle_list-drivers,
+  .step-vehicle_list-assistants {
+    overflow: visible;
+    max-height: none;
+    flex: none;
+  }
+}

@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { type ReactNode } from "react";
-import Login from "./pages/auth";
-import Home from "./pages/home";
-import NewOrderService from "./pages/new_order_service";
+import Dashboard from "./modules/dashboard/DashboardPage";
+import NewOrderService from "./modules/new_order_service";
+import Login from "./modules/login/LoginPage";
 
-function PrivateRoute({children}: {children: ReactNode}) {
+function PrivateRoute({ children }: { children: ReactNode }) {
   const token = localStorage.getItem("token");
   return token ? <>{children}</> : <Navigate to="/" replace />;
 }
@@ -15,8 +15,22 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-        <Route path="/new-order" element={<PrivateRoute><NewOrderService /></PrivateRoute>} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/new-order"
+          element={
+            <PrivateRoute>
+              <NewOrderService />
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>
     </BrowserRouter>

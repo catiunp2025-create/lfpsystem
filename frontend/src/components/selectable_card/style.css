@@ -15,6 +15,7 @@
   padding: var(--spacing-sm);
 
   cursor: pointer;
+  box-sizing: border-box;
 
   transition: all 0.2s ease;
 }
@@ -78,7 +79,44 @@
   color: var(--color-text-dark-blue);
 }
 
+.selectable-sub-title {
+  font-size: var(--body-secondary);
+  color: var(--color-text-dark-blue);
+  opacity: 0.8;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectable-card-title,
+.selectable-sub-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .selectable-card:focus-visible {
   outline: 2px solid var(--color-focus-visible);
   outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .selectable-card {
+    gap: 12px;
+    min-height: 54px;
+    padding: 8px;
+  }
+
+  .selectable-card-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .selectable-card-title {
+    font-size: 0.75rem;
+  }
+
+  .selectable-sub-title {
+    font-size: 0.7rem;
+  }
 }

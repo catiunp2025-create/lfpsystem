@@ -1,0 +1,21 @@
+@import "../../../styles/variables.css";
+
+.step-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .step-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .step-toolbar > * {
+    width: 100%;
+  }
+}

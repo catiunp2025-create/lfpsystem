@@ -80,3 +80,46 @@
   border-color: var(--color-primary);
   color: var(--color-text-primary);
 }
+
+@media (max-width: 768px) {
+  .service-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "check title"
+      "check value";
+    align-items: center;
+
+    gap: 8px 12px;
+    padding: 12px;
+    min-height: auto;
+  }
+
+  .service-card_checkbox {
+    grid-area: check;
+  }
+
+  .service-card_content {
+    grid-area: title;
+    min-width: 0;
+  }
+
+  .service-card_value {
+    grid-area: value;
+    justify-self: start;
+
+    font-size: 0.9rem;
+    color: var(--color-primary-dark);
+  }
+
+  .service-card_title {
+    font-size: 0.95rem;
+    line-height: 1.2;
+
+    overflow: hidden;
+  }
+
+  .service-card_description {
+    display: none;
+  }
+}
