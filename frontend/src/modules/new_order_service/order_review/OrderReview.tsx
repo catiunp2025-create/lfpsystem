@@ -67,8 +67,14 @@ function OrderReview({ currentStepData, handleCloseModal }: OrderReviewProps) {
         <ReviewSection title="Serviços">
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              display: {
+                xs: "flex",
+                md: "grid",
+              },
+              flexDirection: {
+                xs: "column",
+              },
+              gridTemplateColumns: { md: "repeat(3, 1fr)" },
               gap: 1,
             }}
           >

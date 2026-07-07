@@ -28,9 +28,8 @@ function Login() {
         navigate("/dashboard");
       }
     } catch (error: any) {
-      if (error.response.status === 401) {
-        navigate("/auth/login");
-      }
+      alert("Email ou senha inválidos");
+      navigate("/auth/login");
       console.log(error);
     }
   }
