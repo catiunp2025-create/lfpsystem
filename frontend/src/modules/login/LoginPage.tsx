@@ -4,7 +4,8 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/LFP-Logo.png";
 import { TopBarLogin } from "../../components/top_bar_login/TopBarLogin";
-import { useMediaQuery } from "@mui/material";
+import { TextField, useMediaQuery } from "@mui/material";
+import PasswordField from "../../components/password_field/PasswordField";
 
 function Login() {
   const inputEmail = useRef<HTMLInputElement>(null);
@@ -28,9 +29,8 @@ function Login() {
         navigate("/dashboard");
       }
     } catch (error: any) {
-      if (error.response.status === 401) {
-        navigate("/auth/login");
-      }
+      alert("Email ou senha inválidos");
+      navigate("/login");
       console.log(error);
     }
   }
@@ -59,11 +59,20 @@ function Login() {
         <form onSubmit={userLogin}>
           <h1>Entrar</h1>
 
-          <input type="email" placeholder="E-mail" ref={inputEmail} />
+          <TextField
+            type="email"
+            label="E-mail"
+            variant="outlined"
+            fullWidth
+            required
+            inputRef={inputEmail}
+          />
 
-          <input type="password" placeholder="Senha" ref={inputPass} />
+          <PasswordField inputRef={inputPass} />
 
-          <button>Entrar</button>
+          <button type="submit" className="login-submit">
+            Entrar
+          </button>
         </form>
       </div>
     </div>

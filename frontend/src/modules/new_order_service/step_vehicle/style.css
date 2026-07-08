@@ -70,4 +70,13 @@
     max-height: none;
     flex: none;
   }
+
+  .step-vehicle_footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .step-vehicle_footer button {
+    width: 100%;
+  }
 }
