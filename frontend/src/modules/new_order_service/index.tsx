@@ -28,7 +28,7 @@ import {
   STEPS,
   type StepConfig,
 } from "../../types/newOrder";
-import VehicleForm from "./vehicle_form/VehicleForm";
+import VehicleForm from "../../components/vehicle_form/VehicleForm";
 import StepVehicle from "./step_vehicle/StepVehicle";
 import CustomerForm from "./customer_form/CustomerForm";
 import StepCustomer from "./step_customer/StepCustomer";
@@ -345,7 +345,7 @@ function NewOrderService() {
               <CurrentStep.modal.component {...CurrentStep.modal.props} />
             )}
           </div>
-        </div>  
+        </div>
       )}
     </MainLayout>
   );

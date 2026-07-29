@@ -4,7 +4,7 @@ export type IdentificationType = "CNPJ" | "CPF";
 export type ContactType = "PHONE" | "EMAIL";
 export type OrderServiceStatus = "AVAILABLE" | "FINISHED";
 
-export type Users = {
+export type User = {
   id: string;
   name: string;
   role: Role;

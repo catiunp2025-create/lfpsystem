@@ -1,46 +1,3 @@
-@import "./variables.css";
-
-
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-body {
-  font-family: "Playfair Display", serif;
-  background-image: var(--color-bg-dotgrid);
-  background-size: 24px 24px;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
 .button-retry {
   display: flex;
   align-items: center;
@@ -77,4 +34,9 @@ ol {
     var(--color-border-light),
     transparent
   );
+}
+
+.modal_container {
+  flex: 1;
+  gap: var(--spacing-md);
 }

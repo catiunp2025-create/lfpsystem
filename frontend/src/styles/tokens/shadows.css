@@ -1,0 +1,13 @@
+:root {
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-md: 0 4px 8px rgb(0 0 0 / 10%);
+  --shadow-lg: 0 10px 20px rgb(0 0 0 / 15%);
+
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --shadow-text-title: 0 0 3px rgba(255, 255, 255, 0.5);
+  --shadow-text-sub: 0 0 3px rgba(255, 255, 255, 0.4);
+  --shadow-text-h2:
+    0 0 6px rgba(250, 204, 21, 0.5), 0 0 10px rgba(255, 255, 255, 0.25);
+  --shadow-selected-card: 0 0 0 2px rgba(244, 180, 0, 0.15);
+  --shadow-selected-card-hover: 0 0 0 2px rgba(244, 180, 0, 0.35);
+}
