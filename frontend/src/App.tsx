@@ -1,12 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { type ReactNode } from "react";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import Dashboard from "./modules/dashboard/DashboardPage";
 import NewOrderService from "./modules/new_order_service";
 import Login from "./modules/login/LoginPage";
+import VehicleListPage from "./modules/vehicle_list/VehicleListPage";
 
-function PrivateRoute({ children }: { children: ReactNode }) {
+export function PrivateRoute() {
   const token = localStorage.getItem("token");
-  return token ? <>{children}</> : <Navigate to="/" replace />;
+
+  return token ? <Outlet /> : <Navigate to="/login" replace />;
 }
 
 function App() {
@@ -15,22 +22,11 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/new-order"
-          element={
-            <PrivateRoute>
-              <NewOrderService />
-            </PrivateRoute>
-          }
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/new-order" element={<NewOrderService />} />
+          <Route path="/vehicle-list" element={<VehicleListPage />} />
+        </Route>
         <Route path="*" element={<h1>404 - Not Found</h1>} />
       </Routes>
     </BrowserRouter>

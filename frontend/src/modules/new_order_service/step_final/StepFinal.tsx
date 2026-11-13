@@ -1,5 +1,4 @@
 import "./style.css";
-import "../../../styles/variables.css";
 import { MODAL_TYPE, type BaseStepProps } from "../../../types/newOrder";
 import StepHeader from "../step_header/StepHeader";
 import dayjs from "dayjs";

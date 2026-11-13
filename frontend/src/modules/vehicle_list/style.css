@@ -1,0 +1,97 @@
+.vehicle-list-page {
+  flex: 1;
+  padding: 1.5rem;
+  min-height: 100dvh;
+  color: var(--color-text-primary);
+}
+
+.vehicle-list-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--color-text-dark-blue);
+}
+
+.vehicle-list-page__card {
+  flex: 1;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-3);
+}
+
+.vehicle-list-page__status {
+  color: var(--color-text-secondary);
+  font-size: var(--body-secondary);
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+.vehicle-list-page__status--error {
+  color: #f87171;
+}
+
+.vehicle-list-page__table-wrapper {
+  overflow-x: auto;
+}
+
+.vehicle-list-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.vehicle-list-page__table tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.vehicle-list-page__table th,
+.vehicle-list-page__table td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-light);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.vehicle-list-page__table th {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--body-primary);
+}
+
+.vehicle-list-page__row-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.vehicle-list-page__row-action:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .vehicle-list-page__card {
+    padding: var(--space-4);
+  }
+
+  .vehicle-list-page__table th,
+  .vehicle-list-page__table td {
+    padding: var(--space-2);
+  }
+}

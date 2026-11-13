@@ -1,16 +1,14 @@
-@import "../../styles/variables.css";
-
 .searchbar {
   display: flex;
   align-items: center;
 
   gap: 8px;
   width: 100%;
+  max-width: 900px;
   padding: 12px 16px;
 
   border: 1px solid var(--color-border-light);
   border-radius: 10px;
-
   background: transparent;
   font-size: 14px;
 }

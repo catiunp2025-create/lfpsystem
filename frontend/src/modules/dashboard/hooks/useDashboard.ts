@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { AllOrderService } from "../types";
 import { formatApiData, formatChartData } from "../utils/dashboardFormatter";
 import { mostRequestedService } from "../utils/serviceAnalytics";
@@ -45,16 +45,14 @@ export function useDashboard() {
   const previousCardData = apiData.find(
     (data) => data.month === previousMonth && data.year === previousYear,
   );
-  const percentage = currentCardData && previousCardData
-  ? Math.round(
-      (currentCardData.total * 100) /
-      previousCardData.total -
-      100
-    )
-  : null;
+  const percentage =
+    currentCardData && previousCardData
+      ? Math.round((currentCardData.total * 100) / previousCardData.total - 100)
+      : null;
 
-  async function load() {
+  const load = useCallback(async () => {
     try {
+      setLoading(true);
       const data = await getDashboardOrders();
       setOrders(data);
     } catch (error) {
@@ -62,7 +60,7 @@ export function useDashboard() {
     } finally {
       setLoading(false);
     }
-  }
+  }, []);
 
   return {
     chartData,

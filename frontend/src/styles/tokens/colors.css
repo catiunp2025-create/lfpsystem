@@ -1,0 +1,35 @@
+:root {
+  --topbar-height: 50px;
+  --sidebar-closed: 75px;
+  --sidebar-open: 260px;
+
+  --color-topbar-bg: #0c1222;
+  --color-card-bg: #0f172a;
+  --color-content-bg: transparent;
+  --color-select-card-bg: #f4f4f4;
+  --color-bg-accent: #1b315c;
+  --color-bg-dark: #08142b;
+  --color-bg-light: #dbeafc;
+  --color-bg-disable: #e2e8f0;
+  --color-stepbar-bg: #f4f4f4;
+  --color-cards-icon-bg: #f1f5f9;
+  --color-bg-dotgrid: radial-gradient(
+    circle,
+    rgba(148, 163, 184, 0.18) 1px,
+    transparent 1px
+  );
+
+  --color-primary: #fbbf24;
+  --color-primary-dark: #d97706;
+  --color-primary-hover: #d89d00;
+  --color-focus-visible: #f4b400;
+
+  --color-text-primary: #fff;
+  --color-text-secondary: #9aa6c1;
+  --color-text-muted: #7f8ba3;
+  --color-text-dark-blue: #1e293b;
+
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-border-light: #d1d5db;
+  --color-border-card-hover: #94a3b8;
+}

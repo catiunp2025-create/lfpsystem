@@ -13,17 +13,10 @@ import ReceiptLongOutlinedIcon from "@mui/icons-material/ReceiptLongOutlined";
 import femaleIcon from "../../assets/female-icon.png";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import api from "../../services/api";
-import type { Role } from "../../../../packages/shared/src";
+import type { Role, User } from "../../../../packages/shared/src";
 
 type SidebarProps = {
   open: boolean;
-};
-
-type CurrentUser = {
-  id: string;
-  email: string;
-  name: string;
-  role: Role;
 };
 
 const roleLabel: Record<Role, string> = {
@@ -33,10 +26,10 @@ const roleLabel: Record<Role, string> = {
 
 function Sidebar({ open }: SidebarProps) {
   const navigate = useNavigate();
-  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    api.get<CurrentUser>("/auth/me").then((res) => setUser(res.data));
+    api.get<User>("/auth/me").then((res) => setUser(res.data));
   }, []);
 
   function handleLogout() {
@@ -64,9 +57,9 @@ function Sidebar({ open }: SidebarProps) {
             </Link>
           </li>
           <li>
-            <a href="#">
+            <a href="/vehicle-list">
               <LocalShippingOutlinedIcon />
-              Cadastrar Veículo
+              Veículos
             </a>
           </li>
           <li>

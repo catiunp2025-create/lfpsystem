@@ -8,6 +8,8 @@ import { JwtStrategy } from 'src/strategies/JwtStrategy';
 import { CreateVehicleUseCase } from 'src/usecase/vehicle/CreateVehicleUseCase';
 import { FindVehicleUseCase } from 'src/usecase/vehicle/FindVehicleUseCase';
 import { ListVehicleUseCase } from 'src/usecase/vehicle/ListVehicleUseCase';
+import { UpdateVehicleUseCase } from 'src/usecase/vehicle/UpdateVehicleUseCase';
+import { DeleteVehicleUseCase } from 'src/usecase/vehicle/DeleteVehicleUseCase';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { ListVehicleUseCase } from 'src/usecase/vehicle/ListVehicleUseCase';
   controllers: [VehicleController],
   providers: [
     CreateVehicleUseCase,
+    UpdateVehicleUseCase,
+    DeleteVehicleUseCase,
     ListVehicleUseCase,
     FindVehicleUseCase,
     JwtStrategy,

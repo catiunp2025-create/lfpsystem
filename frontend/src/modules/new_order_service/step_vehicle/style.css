@@ -1,5 +1,3 @@
-@import "../../../styles/variables.css";
-
 .step-vehicle {
   display: flex;
   flex-direction: column;

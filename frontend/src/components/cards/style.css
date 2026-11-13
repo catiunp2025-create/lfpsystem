@@ -1,5 +1,3 @@
-@import "../../styles/variables.css";
-
 .card {
   background:
     linear-gradient(var(--color-card-bg), var(--color-card-bg)) padding-box,
